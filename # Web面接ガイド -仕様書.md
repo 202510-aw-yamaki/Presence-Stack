@@ -6,9 +6,9 @@
 ├─ 🏠 [index.html] - トップページ（目次）
 │  
 ├─ 📚 第1章：Web面接前に確認しておきたいこと
-│  ├─ [pre-interview-checks.html] - 章トップ（第一章の目次）
-│  │
-|　├―pre-interview-checksフォルダ
+│　├─ [pre-interview-checks.html] - 章トップ（第一章の目次）
+│　│
+|　└ [pre-interview-checks]フォルダ
 |　　  ├─ 🔧 1-1. [usage-device.html]
 │ 　　 │       使用機材の確認
 │ 　　 │
@@ -21,7 +21,7 @@
 │  　　└─ 🌐 1-4. [platform-overview.html]
 │          使用されやすいWeb会議ツール
 │           │
-|           ├─platform-overviewフォルダ
+|           └platform-overviewフォルダ
 │         　 　├─ 💜 [zoom.html]
 │        　  　├─ 🔵 [google-meet.html]
 │          　　└─ 🟢 [microsoft-teams.html]
