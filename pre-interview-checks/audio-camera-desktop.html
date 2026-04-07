@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1-2. 音量の調整とデスクトップのレイアウト | Web面接ガイド</title>
+  <link rel="stylesheet" href="..\css\common.css">
+  <link rel="stylesheet" href="..\css\section_common.css">
+  <style>
+    .audio-camera-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .audio-camera-card .check-figure {
+      min-height: 0;
+      align-self: start;
+    }
+
+    .audio-camera-card .check-figure img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      background: linear-gradient(180deg, #f4f7f5, #e4ece8);
+    }
+
+    .audio-camera-card.is-portrait .check-figure img {
+      aspect-ratio: 1 / 1;
+    }
+
+    .audio-camera-card.is-landscape .check-figure img {
+      aspect-ratio: 16 / 9;
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">Pre Interview Checks</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="..\index.html">Indexへ</a>
+            <a class="header-nav-link" href="..\pre-interview-checks.html">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="usage-device.html">前へ</a>
+              <div class="page-number">3 / 6</div>
+              <a class="pager-link" href="environment-notifications.html">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="slide-body" aria-label="1-2 音量の調整とデスクトップのレイアウト">
+        <section class="section-page" aria-labelledby="page-title">
+          <article class="card title-card">
+            <h1 id="page-title" class="page-title">1-2. 音量の調整とデスクトップのレイアウト</h1>
+             </article>
+
+          <article class="note" aria-label="注釈">
+            <div class="note-head">
+              <span class="note-badge">注釈</span>
+            </div>
+            <p class="text">音声と映像は、面接時の第一印象を大きく左右します。<br>あわせて、資料を見ながら自然に話せる画面配置も整えておくと安心です。</p>
+          </article>
+
+          <article class="card audio-camera-card is-portrait">
+            <h2 class="block-title">音量の調整</h2>
+            <div class="check-body">
+              <div class="check-text">
+                <ul class="check-list">
+                  <li>音量ミキサーの開き方を確認しておきましょう</li>
+                  <li>必要に応じて音量設定を整えておきましょう</li>
+                  <li>自分の声量が小さすぎないかテストしておきましょう</li>
+                  <li>面接中はミュートにし、面接時のみ解除する習慣にすると安全です</li>
+                </ul>
+              </div>
+              <figure class="check-figure" aria-label="音量ミキサーのイメージ">
+                <div class="media-frame">
+                  <img src="..\image\音量ミキサー.png" alt="音量ミキサー">
+                </div>
+              </figure>
+            </div>
+          </article>
+
+          <article class="card audio-camera-card is-landscape">
+            <h2 class="block-title">デスクトップレイアウト</h2>
+            <div class="check-body">
+              <div class="check-text">
+                <ul class="check-list">
+                  <li>面談時にはモニターを使用しましょう。デュアルモニターを活用しましょう</li>
+                  <li>Web会議ツール用と資料確認用にモニターを分けると、資料の確認に集中できます</li>
+                  <li>ただし、視線移動が大きくなりすぎない配置にすることが大切です</li>
+                </ul>
+              </div>
+              <figure class="check-figure" aria-label="マルチディスプレイのイメージ">
+                <div class="media-frame">
+                  <img src="..\image\マルチディスプレイ説明.png" alt="マルチディスプレイ説明">
+                </div>
+              </figure>
+            </div>
+          </article>
+
+          <article class="note" aria-label="注釈">
+            <div class="note-head">
+              <span class="note-badge">注釈</span>
+            </div>
+            <p class="text">ノートパソコン単独でWeb会議ツールを使う場合でも、<br>外部モニターを資料表示用にすると、資料に合ったレイアウトを設定しやすくなります。<br>注釈としてマウスカーソルが相手側に映らないように、<br>必要な設定も忘れないよう気をつけましょう。</p>
+          </article>
+        </section>
+      </main>
+
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="usage-device.html">前へ</a>
+              <div class="page-number">3 / 6</div>
+              <a class="pager-link" href="environment-notifications.html">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 50%;"></div>
+            </div>
+            <div class="pager-hint">各項目を上から順に確認できます</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="..\js\pre-interview-checks.js"></script>
+  <script src="..\js\common-navigation.js"></script>
+</body>
+</html>
