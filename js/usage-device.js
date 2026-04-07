@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.dataset.step = String(stepIndex);
   };
 
-  const openModal = (modal) => {
+  const openModal = (modal, stepIndex = 0) => {
     if (!modal) return;
-    setStep(modal, 0);
+    setStep(modal, stepIndex);
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('has-modal');
@@ -50,17 +50,21 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   document.querySelectorAll('[data-modal-target]').forEach((trigger) => {
-    const handleOpen = () => {
+    const handleOpen = (stepIndex = 0) => {
       const selector = trigger.getAttribute('data-modal-target');
       const modal = selector ? document.querySelector(selector) : null;
-      openModal(modal);
+      openModal(modal, stepIndex);
     };
 
-    trigger.addEventListener('click', handleOpen);
+    trigger.addEventListener('click', (event) => {
+      const stepTarget = event.target.closest('[data-modal-step]');
+      const stepIndex = Number(stepTarget?.getAttribute('data-modal-step') || 0);
+      handleOpen(stepIndex);
+    });
     trigger.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        handleOpen();
+        handleOpen(0);
       }
     });
   });
