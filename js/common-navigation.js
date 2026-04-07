@@ -51,7 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const destination = deltaX < 0 ? nextLink?.getAttribute('href') : prevLink?.getAttribute('href');
 
     if (destination) {
-      window.location.href = destination;
+      if (window.PresencePageTransition?.navigate) {
+        window.PresencePageTransition.navigate(destination);
+      } else {
+        window.location.href = destination;
+      }
     }
   };
 
