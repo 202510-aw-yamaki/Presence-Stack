@@ -8,8 +8,8 @@
 ├─ 📚 第1章：Web面接前に確認しておきたいこと
 │  ├─ [pre-interview-checks.html] - 章トップ（第一章の目次）
 │  │
-｜　├―pre-interview-checksフォルダ
-｜　　  ├─ 🔧 1-1. [usage-device.html]
+|　├―pre-interview-checksフォルダ
+|　　  ├─ 🔧 1-1. [usage-device.html]
 │ 　　 │       使用機材の確認
 │ 　　 │
 │ 　　 ├─ 🔊 1-2. [audio-camera-desktop.html]
@@ -20,8 +20,8 @@
 │ 　　 │
 │  　　└─ 🌐 1-4. [platform-overview.html]
 │          使用されやすいWeb会議ツール
-│          │
-｜　　　　　├─platform-overviewフォルダ
+│           │
+|           ├─platform-overviewフォルダ
 │         　 　├─ 💜 [zoom.html]
 │        　  　├─ 🔵 [google-meet.html]
 │          　　└─ 🟢 [microsoft-teams.html]
@@ -60,36 +60,21 @@
 │          ChatGPTと模擬面接を行う
 │
 ├─ ✅ 第4章：最後に
-｜  └─ [closing.html]
-｜     最終チェックリストと全体のまとめ
-｜
-｜
+|  └─ [closing.html]
+|     最終チェックリストと全体のまとめ
+|
 ├─ CSSフォルダ
 │  └─ common.css（基本的にコモンから全て）
-｜
+|
 ├――必要であれば各種ページに合うCSSを作成
 │
 │
 ├─ JSフォルダ
 │  ├─ index.js
-｜  ｜
+|  |
 │  ├― 各種.JS
 
 
-```
-
-## **ページ遷移フロー**
-
-```
-index (0/4)
-   ↓
-pre-interview-checks (1/6) ← usage-device ← audio-camera ← env-notifications ← platform-overview ← zoom/meet/teams
-   ↓
-materials-prep (2/6) ← company-info ← resume ← portfolio ← curriculum ← questionnaire
-   ↓
-chatgpt-support (3/6) ← job-understanding ← reflection ← mock-qa ← mock-interview
-   ↓
-closing (4/4)
 ```
 
 ## **階層構造**
@@ -103,7 +88,8 @@ closing (4/4)
 
 利用者は通常、この順序で進みます：
 1. **トップページ** → 全体像を把握
-2. **第1章** → 環境確認（4-6ページ）
+2. **第1章** → 環境確認（4ページ）
+プラットフォーム詳細ページ（3ページ）
 3. **第2章** → 資料準備（5ページ）
 4. **第3章** → ChatGPT活用（4ページ）
 5. **第4章** → 最終チェック＆まとめ
