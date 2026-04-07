@@ -66,18 +66,21 @@
             <p class="text">音声と映像は、面接時の第一印象を大きく左右します。<br>あわせて、資料を見ながら自然に話せる画面配置も整えておくと安心です。</p>
           </article>
 
-          <article class="card audio-camera-card is-portrait">
-            <h2 class="block-title">音量の調整</h2>
+          <article class="check-card audio-camera-card is-portrait" aria-labelledby="audio-title" role="button" tabindex="0" data-modal-target="#audio-modal">
+            <div class="check-card-header">
+              <h2 id="audio-title" class="check-title">音量の調整</h2>
+            </div>
             <div class="check-body">
-              <div class="check-text">
+              <div class="check-text" data-modal-step="0">
                 <ul class="check-list">
                   <li>音量ミキサーの開き方を確認しておきましょう</li>
                   <li>必要に応じて音量設定を整えておきましょう</li>
                   <li>自分の声量が小さすぎないかテストしておきましょう</li>
                   <li>面接中はミュートにし、面接時のみ解除する習慣にすると安全です</li>
                 </ul>
+                <p class="text">事前に自分の声を録音して確認しておくと、声が小さい、こもって聞こえる、周囲の生活音が入りやすいといった問題に気づけます。面接本番では話し始めてから直す余裕が少ないため、開始前に一度テストしておくと安心です。</p>
               </div>
-              <figure class="check-figure" aria-label="音量ミキサーのイメージ">
+              <figure class="check-figure" aria-label="音量ミキサーのイメージ" data-modal-step="1">
                 <div class="media-frame">
                   <img src="..\image\音量ミキサー.png" alt="音量ミキサー">
                 </div>
@@ -85,17 +88,19 @@
             </div>
           </article>
 
-          <article class="card audio-camera-card is-landscape">
-            <h2 class="block-title">デスクトップレイアウト</h2>
+          <article class="check-card audio-camera-card is-landscape" aria-labelledby="desktop-layout-title" role="button" tabindex="0" data-modal-target="#desktop-layout-modal">
+            <div class="check-card-header">
+              <h2 id="desktop-layout-title" class="check-title">デスクトップレイアウト</h2>
+            </div>
             <div class="check-body">
-              <div class="check-text">
+              <div class="check-text" data-modal-step="0">
                 <ul class="check-list">
                   <li>面談時にはモニターを使用しましょう。デュアルモニターを活用しましょう</li>
                   <li>Web会議ツール用と資料確認用にモニターを分けると、資料の確認に集中できます</li>
                   <li>ただし、視線移動が大きくなりすぎない配置にすることが大切です</li>
                 </ul>
               </div>
-              <figure class="check-figure" aria-label="マルチディスプレイのイメージ">
+              <figure class="check-figure" aria-label="マルチディスプレイのイメージ" data-modal-step="1">
                 <div class="media-frame">
                   <img src="..\image\マルチディスプレイ説明.png" alt="マルチディスプレイ説明">
                 </div>
@@ -132,7 +137,85 @@
     </div>
   </div>
 
-  <script src="..\js\pre-interview-checks.js"></script>
+  <section class="section-modal" id="audio-modal" aria-hidden="true" aria-labelledby="audio-modal-title">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="audio-modal-title">
+      <div class="modal-header">
+        <h2 class="modal-title" id="audio-modal-title">音量の調整</h2>
+        <button class="modal-close" type="button" aria-label="閉じる" data-modal-close>閉じる</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-panel is-active">
+          <div class="modal-step">
+            <div class="modal-text-panel check-text">
+              <ul class="modal-list">
+                <li>音量ミキサーの開き方を確認しておきましょう</li>
+                <li>必要に応じて音量設定を整えておきましょう</li>
+                <li>自分の声量が小さすぎないかテストしておきましょう</li>
+                <li>面接中はミュートにし、面接時のみ解除する習慣にすると安全です</li>
+              </ul>
+              <p class="text">事前に自分の声を録音して確認しておくと、声が小さい、こもって聞こえる、周囲の生活音が入りやすいといった問題に気づけます。面接本番では話し始めてから直す余裕が少ないため、開始前に一度テストしておくと安心です。</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-panel">
+          <div class="modal-step">
+            <figure class="modal-figure modal-image-panel">
+              <div class="media-frame">
+                <img src="..\image\音量ミキサー.png" alt="音量ミキサー">
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-progress" data-modal-progress>1 / 2</div>
+        <div class="modal-controls">
+          <button class="modal-nav is-secondary" type="button" data-modal-prev>前へ</button>
+          <button class="modal-nav" type="button" data-modal-next>次へ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-modal" id="desktop-layout-modal" aria-hidden="true" aria-labelledby="desktop-layout-modal-title">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="desktop-layout-modal-title">
+      <div class="modal-header">
+        <h2 class="modal-title" id="desktop-layout-modal-title">デスクトップレイアウト</h2>
+        <button class="modal-close" type="button" aria-label="閉じる" data-modal-close>閉じる</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-panel is-active">
+          <div class="modal-step">
+            <div class="modal-text-panel check-text">
+              <ul class="modal-list">
+                <li>面談時にはモニターを使用しましょう。デュアルモニターを活用しましょう</li>
+                <li>Web会議ツール用と資料確認用にモニターを分けると、資料の確認に集中できます</li>
+                <li>ただし、視線移動が大きくなりすぎない配置にすることが大切です</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-panel">
+          <div class="modal-step">
+            <figure class="modal-figure modal-image-panel">
+              <div class="media-frame">
+                <img src="..\image\マルチディスプレイ説明.png" alt="マルチディスプレイ説明">
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-progress" data-modal-progress>1 / 2</div>
+        <div class="modal-controls">
+          <button class="modal-nav is-secondary" type="button" data-modal-prev>前へ</button>
+          <button class="modal-nav" type="button" data-modal-next>次へ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="..\js\usage-device.js"></script>
   <script src="..\js\common-navigation.js"></script>
 </body>
 </html>
