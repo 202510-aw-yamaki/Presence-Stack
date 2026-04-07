@@ -120,6 +120,86 @@
   transition: transform 0.2s ease;
 }
 
+.visual-card {
+  min-height: 100%;
+  display: grid;
+  align-content: end;
+  gap: 14px;
+  padding: 18px;
+  color: #f7fbf9;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.22), transparent 32%),
+    linear-gradient(145deg, rgba(8, 19, 37, 0.26), rgba(8, 19, 37, 0.56));
+}
+
+.visual-card.theme-blue {
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.22), transparent 32%),
+    linear-gradient(145deg, rgba(8, 19, 37, 0.26), rgba(8, 19, 37, 0.56)),
+    linear-gradient(135deg, #6c8fb1, #415b72);
+}
+
+.visual-card.theme-gold {
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.22), transparent 32%),
+    linear-gradient(145deg, rgba(30, 25, 12, 0.26), rgba(30, 25, 12, 0.56)),
+    linear-gradient(135deg, #c49357, #785633);
+}
+
+.visual-card.theme-green {
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.22), transparent 32%),
+    linear-gradient(145deg, rgba(13, 23, 22, 0.24), rgba(13, 23, 22, 0.52)),
+    linear-gradient(135deg, #5f9d8a, #30554c);
+}
+
+.visual-card.theme-purple {
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.22), transparent 32%),
+    linear-gradient(145deg, rgba(29, 14, 27, 0.24), rgba(29, 14, 27, 0.52)),
+    linear-gradient(135deg, #9a77a5, #563b64);
+}
+
+.visual-card.theme-slate {
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), transparent 30%),
+    linear-gradient(145deg, rgba(18, 26, 28, 0.24), rgba(18, 26, 28, 0.52)),
+    linear-gradient(135deg, #70919a, #40545b);
+}
+
+.visual-eyebrow {
+  justify-self: start;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.visual-title {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.8rem);
+  line-height: 1.4;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.visual-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.visual-chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(17, 18, 20, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .check-card:hover .check-figure img,
 .check-card:focus-visible .check-figure img {
   transform: scale(1.04);
