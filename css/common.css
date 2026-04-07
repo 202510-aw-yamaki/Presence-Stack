@@ -198,9 +198,10 @@ a {
 .slide-body {
   padding: 12px;
   background: var(--surface-strong);
-  height: 750px;
-  overflow: auto;
+  overflow: visible;
   scrollbar-gutter: stable;
+  overscroll-behavior-x: contain;
+  touch-action: pan-y pinch-zoom;
 }
 
 .youtube-index {
@@ -517,7 +518,7 @@ body.is-scrolled .slide-header {
 
   .slide-body {
     height: auto;
-    max-height: calc(100vh - 140px);
+    max-height: none;
   }
 
   .content-split {
@@ -583,7 +584,7 @@ body.is-scrolled .slide-header {
 
   .slide-body {
     padding: 12px;
-    max-height: calc(100vh - 132px);
+    max-height: none;
   }
 
   .gallery-grid {

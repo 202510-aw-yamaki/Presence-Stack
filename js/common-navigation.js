@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startY: 0,
     active: false,
   };
+  const edgeGuard = 28;
 
   const startSwipe = (clientX, clientY, target) => {
     if (document.body.classList.contains('has-modal')) {
@@ -19,6 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (target?.closest('a, button, input, textarea, select, label')) {
+      return;
+    }
+
+    if (clientX <= edgeGuard || clientX >= window.innerWidth - edgeGuard) {
       return;
     }
 
@@ -39,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const absX = Math.abs(deltaX);
     const absY = Math.abs(deltaY);
 
-    if (absX < 72 || absX <= absY * 1.2) {
+    if (absX < 96 || absX <= absY * 1.35) {
       return;
     }
 
