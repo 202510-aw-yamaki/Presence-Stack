@@ -1,0 +1,4192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web面接に向けた事前準備と対策 | strict source edition</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <style>
+:root {
+  --bg: #e4ebe6;
+  --bg2: #f0f4f1;
+  --surface: rgba(248, 250, 248, 0.86);
+  --surface-strong: #f8faf8;
+  --card: rgba(255, 255, 255, 0.88);
+  --line: #cad7d0;
+  --ink: #1f2d28;
+  --muted: #556a61;
+  --accent: #486b61;
+  --accent-strong: #2f4a42;
+  --shadow: 0 18px 48px rgba(28, 42, 37, 0.15);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 360px;
+}
+
+html.js-page-transition .slide-page {
+  opacity: 0;
+  transform: translateY(8px);
+  filter: saturate(0.97) brightness(0.985);
+}
+
+html.js-page-transition.page-ready .slide-page {
+  opacity: 1;
+  transform: translateY(0);
+  filter: saturate(1) brightness(1);
+  transition:
+    opacity 320ms ease,
+    transform 320ms ease,
+    filter 420ms ease;
+}
+
+body {
+  margin: 0;
+  min-width: 360px;
+  min-height: 98vh;
+  font-family: "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 20% 0, rgba(72, 107, 97, 0.18), transparent 34%),
+    linear-gradient(160deg, var(--bg), var(--bg2));
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 16px auto;
+}
+
+.slide-page {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  overflow: clip;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-header,
+.slide-footer {
+  height: 54px;
+  padding: 0 28px;
+  background: rgba(238, 243, 239, 0.92);
+  display: flex;
+  align-items: center;
+}
+
+.slide-header {
+  border-bottom: 1px solid var(--line);
+}
+
+.slide-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.header-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #c7d7cf;
+  background: #f1f6f3;
+  color: var(--accent-strong);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.header-nav-link.is-current {
+  display: none;
+}
+
+.slide-footer {
+  border-top: 1px solid var(--line);
+}
+
+.slide-body {
+  padding: 12px;
+  background: var(--surface-strong);
+  min-height: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 7px 14px;
+  border: 1px solid #c7d7cf;
+  border-radius: 999px;
+  background: #dfe9e4;
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.page-title,
+.section-title,
+.card-title,
+.block-title {
+  margin: 0;
+}
+
+.page-title {
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  line-height: 1.12;
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 2.8vw, 32px);
+  line-height: 1.2;
+}
+
+.card-title,
+.block-title {
+  font-size: 1.05rem;
+  color: var(--accent-strong);
+}
+
+.page-lead,
+.text,
+.list,
+.number-list,
+.caption {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.stack,
+.hero-grid,
+.content-grid,
+.dual-grid,
+.triple-grid,
+.link-list {
+  display: grid;
+  gap: 6px;
+}
+
+.hero-grid,
+.content-grid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+}
+
+.dual-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.triple-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card,
+.note,
+.image-panel,
+.link-list a,
+.checklist-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(41, 56, 50, 0.08);
+}
+
+.card,
+.note,
+.image-panel,
+.checklist-card {
+  padding: 12px;
+}
+
+.note {
+  border-left: 4px solid var(--accent);
+}
+
+.image-panel {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.image-frame {
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #dde6e1;
+}
+
+.image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-modal-trigger {
+  padding: 0;
+  width: 100%;
+  border: 0;
+  cursor: zoom-in;
+}
+
+.image-modal-trigger img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.image-modal[hidden] {
+  display: none;
+}
+
+.image-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(22, 31, 28, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.image-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  margin: 16px auto;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 24px;
+  background: rgba(248, 250, 248, 0.96);
+  box-shadow: 0 24px 60px rgba(18, 28, 24, 0.28);
+  opacity: 0;
+  transform: translateY(10px) scale(0.985);
+  transition: opacity 180ms ease, transform 220ms ease;
+}
+
+.image-modal.is-open .image-modal-dialog {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.image-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(31, 45, 40, 0.12);
+  color: var(--accent-strong);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.image-modal-content {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 96px);
+  margin: 24px auto 0;
+  object-fit: contain;
+}
+
+.list,
+.number-list {
+  padding-left: 1.2rem;
+}
+
+.list li + li,
+.number-list li + li {
+  margin-top: 8px;
+}
+
+.list-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.list-inline li {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #edf3ef;
+  border: 1px solid var(--line);
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.link-list a {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 14px;
+  padding: 8px;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.link-list a:hover,
+.link-list a:focus-visible {
+  transform: translateY(-2px);
+  border-color: #9db3aa;
+  box-shadow: 0 12px 30px rgba(41, 56, 50, 0.12);
+}
+
+.link-index {
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #edf3ef, #dce7e1);
+  color: var(--accent-strong);
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.link-title {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.link-text {
+  margin: 0;
+  color: var(--muted);
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.pager-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pager-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 180px;
+}
+
+.pager-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #f7fbf9;
+  font-weight: 700;
+}
+
+.pager-link.is-secondary {
+  background: #dfe9e4;
+  color: var(--accent-strong);
+}
+
+.pager-link.is-disabled {
+  pointer-events: none;
+  background: #c8d6cf;
+  color: rgba(47, 74, 66, 0.7);
+}
+
+.page-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  font-weight: 800;
+  color: var(--accent-strong);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.pager-side {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+}
+
+.pager-progress {
+  width: min(280px, 28vw);
+  height: 8px;
+  border-radius: 999px;
+  background: #c9d8d0;
+  overflow: hidden;
+}
+
+.pager-progress-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #89a399, #486b61);
+}
+
+.pager-hint {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-page-transition .slide-page,
+  html.js-page-transition.page-ready .slide-page {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .site-shell {
+    width: min(100%, calc(100% - 24px));
+    margin: 12px auto;
+  }
+
+  .hero-grid,
+  .content-grid,
+  .dual-grid,
+  .triple-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .slide-header,
+  .slide-footer {
+    padding: 0 22px;
+  }
+
+  .slide-body {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-shell {
+    width: min(100%, calc(100% - 16px));
+    margin: 8px auto;
+  }
+
+  .slide-page {
+    border-radius: 18px;
+  }
+
+  .slide-header,
+  .slide-footer {
+    padding: 0 18px;
+  }
+
+  .slide-body {
+    padding: 18px;
+  }
+
+  .slide-header-bar {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .header-nav {
+    gap: 6px;
+  }
+
+  .header-nav-link {
+    min-height: 28px;
+    padding: 5px 10px;
+    font-size: 0.76rem;
+  }
+
+  .pager {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .pager-main {
+    width: auto;
+    flex: 0 0 auto;
+    min-width: 180px;
+    justify-content: flex-start;
+  }
+
+  .pager-side {
+    width: auto;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-left: 0;
+    gap: 8px;
+  }
+
+  .pager-link {
+    flex: 0 0 auto;
+  }
+
+  .pager-progress {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+
+  .pager-hint {
+    font-size: 0.78rem;
+    white-space: normal;
+    text-align: right;
+    line-height: 1.25;
+  }
+
+  .image-modal-dialog {
+    width: min(100vw - 16px, 900px);
+    max-height: calc(100vh - 16px);
+    margin: 8px auto;
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .image-modal-content {
+    max-height: calc(100vh - 72px);
+    margin-top: 20px;
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .slide-body {
+    height: 750px;
+    overflow: hidden;
+  }
+}
+
+.hero-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.index-intro {
+  display: grid;
+  gap: 14px;
+  grid-area: intro;
+}
+
+.index-toc {
+  grid-area: toc;
+  align-self: start;
+}
+
+.hero-visual {
+  grid-area: visual;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: stretch;
+}
+
+.hero-visual .image-frame {
+  height: auto;
+  min-height: 0;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.toc-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.toc-note {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-areas:
+      "intro visual"
+      "toc visual";
+    align-items: start;
+    height: 100%;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-areas:
+      "intro visual"
+      "toc visual";
+    align-items: start;
+    height: 100%;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+  .index-intro > .note {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "toc";
+  }
+
+  .hero-visual {
+    display: none;
+  }
+}
+
+.chapter-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.chapter-intro {
+  grid-area: intro;
+  display: grid;
+  gap: 14px;
+}
+
+.chapter-toc {
+  grid-area: toc;
+  align-self: start;
+}
+
+.chapter-visual {
+  grid-area: visual;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.toc-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.toc-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.detail-hero {
+  align-items: start;
+  min-height: 0;
+}
+
+.detail-visual {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.detail-visual .image-frame {
+  min-height: 220px;
+}
+
+.usage-device-visual,
+.audio-camera-visual {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  height: auto;
+  min-height: 0;
+}
+
+.usage-device-visual > .image-frame,
+.audio-camera-visual > .image-frame {
+  min-height: 0;
+}
+
+.usage-device-visual picture.image-frame,
+.audio-camera-visual picture.image-frame {
+  display: block;
+  width: 100%;
+}
+
+.usage-device-visual img,
+.audio-camera-visual img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (min-width: 1024px) {
+  .chapter-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-areas:
+      "intro visual"
+      "toc visual";
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .chapter-visual {
+    display: grid;
+    grid-template-rows: 1fr;
+    height: 100%;
+  }
+
+  .chapter-visual .image-frame {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .chapter-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .environment-notifications-hero,
+  .platform-overview-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+    align-items: stretch;
+  }
+
+  .environment-notifications-stack,
+  .platform-overview-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+  }
+
+  .environment-notifications-stack > .card {
+    flex: 0 0 auto;
+  }
+
+  .environment-notifications-stack > .note {
+    flex: 1 1 auto;
+  }
+
+  .environment-notifications-visual {
+    align-self: end;
+  }
+
+  .platform-overview-hero {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .platform-overview-visual {
+    align-self: stretch;
+    height: 100%;
+    min-height: 0;
+    align-content: end;
+  }
+
+  .platform-overview-visual > .image-frame {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .platform-overview-visual img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .chapter-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-areas:
+      "intro visual"
+      "toc visual";
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .chapter-visual {
+    display: grid;
+    grid-template-rows: 1fr;
+    height: 100%;
+  }
+
+  .chapter-visual .image-frame {
+    height: 100%;
+  }
+
+  .chapter-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .environment-notifications-hero,
+  .platform-overview-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 14px 16px;
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .environment-notifications-stack,
+  .platform-overview-stack {
+    display: contents;
+  }
+
+  .environment-notifications-stack > .card:first-child,
+  .platform-overview-stack > .card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .environment-notifications-stack > .card:nth-child(n + 2),
+  .environment-notifications-stack > .note,
+  .platform-overview-stack > .card:nth-child(n + 2),
+  .platform-overview-stack > .note {
+    grid-column: 1;
+  }
+
+  .audio-camera-stack .section-title br,
+  .environment-notifications-stack .section-title br,
+  .platform-overview-stack .section-title br {
+    display: none;
+  }
+
+  .audio-camera-stack .section-title .title-indent,
+  .environment-notifications-stack .section-title .title-indent,
+  .platform-overview-stack .section-title .title-indent {
+    display: none;
+  }
+
+  .environment-notifications-visual,
+  .platform-overview-visual {
+    grid-column: 2;
+    grid-row: 2 / span 3;
+    height: auto;
+    align-self: end;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 820px) {
+  .chapter-intro > .note {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .chapter-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "toc";
+  }
+
+  .chapter-visual {
+    display: none;
+  }
+
+  .detail-visual {
+    display: none;
+  }
+
+  .usage-device-visual {
+    display: grid;
+  }
+
+  .environment-notifications-hero,
+  .platform-overview-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .environment-notifications-stack,
+  .platform-overview-stack {
+    width: 100%;
+  }
+
+  .environment-notifications-stack > .note {
+    display: none;
+  }
+
+  .environment-notifications-visual,
+  .platform-overview-visual {
+    display: grid;
+    order: 2;
+    align-self: stretch;
+  }
+}
+
+.usage-device-visual {
+  align-self: start;
+}
+
+@media (min-width: 1024px) {
+  .usage-device-hero {
+    grid-template-columns: minmax(0, 1.14fr) minmax(280px, 0.86fr);
+    align-items: start;
+  }
+
+  .usage-device-stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    min-height: 0;
+  }
+
+  .usage-device-stack > .card,
+  .usage-device-stack > .note {
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .usage-device-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-rows: auto auto auto;
+    gap: 14px 16px;
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .usage-device-stack {
+    display: contents;
+  }
+
+  .usage-device-stack > .card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .usage-device-stack > .card:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .usage-device-stack > .note {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .usage-device-visual {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    gap: 0;
+  }
+}
+
+.audio-camera-hero {
+  align-items: stretch;
+}
+
+.audio-camera-hero > .stack {
+  gap: 0;
+}
+
+.audio-camera-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  align-self: stretch;
+  height: 100%;
+}
+
+.audio-camera-stack > .card,
+.audio-camera-stack > .note {
+  padding-inline: 12px;
+  padding-block: calc(12px + var(--audio-camera-extra-pad, 0px));
+}
+
+.audio-camera-visual {
+  align-self: end;
+}
+
+.audio-camera-sp-image {
+  display: none;
+  margin: 12px 0 0;
+}
+
+.audio-camera-sp-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #dde6e1;
+}
+
+@media (min-width: 768px) {
+  .audio-camera-hero .list li + li {
+    margin-top: 2px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .audio-camera-hero {
+    grid-template-columns: minmax(0, 1.14fr) minmax(280px, 0.86fr);
+    align-items: start;
+  }
+
+  .audio-camera-stack {
+    gap: 14px;
+    justify-content: flex-start;
+  }
+
+  .audio-camera-stack > .card,
+  .audio-camera-stack > .note {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .audio-camera-sp-image {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .audio-camera-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 14px 16px;
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .audio-camera-stack {
+    display: contents;
+  }
+
+  .audio-camera-stack > .card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .audio-camera-stack > .card:nth-child(n + 2),
+  .audio-camera-stack > .note {
+    grid-column: 1;
+  }
+
+  .audio-camera-visual {
+    grid-column: 2;
+    grid-row: 2 / span 3;
+    height: auto;
+  }
+}
+
+.environment-notifications-stack {
+  min-height: 0;
+}
+
+.environment-notifications-stack > .note {
+  min-height: 0;
+}
+
+.platform-overview-stack {
+  min-height: 0;
+}
+
+.platform-tool-list {
+  display: grid;
+  gap: 12px;
+}
+
+.platform-tool-link {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f5f8f6, #edf3ef);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.platform-tool-link:hover,
+.platform-tool-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: #9db3aa;
+  box-shadow: 0 12px 30px rgba(41, 56, 50, 0.12);
+}
+
+.platform-tool-name {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 30px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #f7fbf9;
+  font-weight: 700;
+}
+
+.platform-tool-text {
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+@media (min-width: 1024px) {
+  .platform-overview-stack > .note {
+    margin-top: auto;
+  }
+}
+
+.google-meet-sp-visual {
+  display: none;
+  margin: 0;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .google-meet-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-rows: auto auto auto;
+    gap: 14px 16px;
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .google-meet-stack {
+    display: contents;
+  }
+
+  .google-meet-stack > .card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .google-meet-stack > .card:nth-child(n + 2),
+  .google-meet-stack > .note {
+    grid-column: 1;
+  }
+
+  .google-meet-stack > .card:nth-child(2) {
+    display: none;
+  }
+
+  .google-meet-stack > .card:nth-child(3) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .google-meet-stack > .note {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .google-meet-stack .section-title br,
+  .google-meet-stack .section-title .title-indent {
+    display: none;
+  }
+
+  .google-meet-stack > .card:first-child .text br {
+    display: none;
+  }
+
+  .google-meet-hero .detail-visual {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    height: 100%;
+    min-height: 0;
+    align-self: stretch;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .google-meet-hero .detail-visual > .image-frame:first-of-type {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .google-meet-hero .detail-visual > .image-frame:first-of-type img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .google-meet-hero .detail-visual > .image-frame:last-of-type img {
+    height: auto;
+    object-fit: contain;
+  }
+
+  .google-meet-hero .detail-visual > .image-frame:last-of-type {
+    display: grid;
+    place-items: center;
+    background: #fff;
+  }
+}
+
+@media (max-width: 767px) {
+  .google-meet-sp-visual {
+    display: grid;
+    gap: 12px;
+  }
+
+  .google-meet-sp-visual > .image-frame:last-of-type {
+    display: grid;
+    place-items: center;
+    background: #fff;
+  }
+
+  .google-meet-sp-visual > .image-frame:last-of-type img {
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.zoom-sp-visual {
+  display: none;
+  margin: 0;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .zoom-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-rows: auto auto auto;
+    gap: 14px 16px;
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .zoom-stack {
+    display: contents;
+  }
+
+  .zoom-stack > .card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .zoom-stack > .card:nth-child(n + 2),
+  .zoom-stack > .note {
+    grid-column: 1;
+  }
+
+  .zoom-stack > .card:nth-child(2) {
+    display: none;
+  }
+
+  .zoom-stack > .card:nth-child(3) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .zoom-stack > .note {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .zoom-stack .section-title br,
+  .zoom-stack .section-title .title-indent {
+    display: none;
+  }
+
+  .zoom-stack > .card:first-child .text br {
+    display: none;
+  }
+
+  .zoom-hero .detail-visual {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    height: 100%;
+    min-height: 0;
+    align-self: stretch;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .zoom-hero .detail-visual > .image-frame:first-of-type {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .zoom-hero .detail-visual > .image-frame:first-of-type img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .zoom-hero .detail-visual > .image-frame:last-of-type {
+    display: grid;
+    place-items: center;
+    background: #fff;
+  }
+
+  .zoom-hero .detail-visual > .image-frame:last-of-type img {
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 767px) {
+  .zoom-sp-visual {
+    display: grid;
+    gap: 12px;
+  }
+
+  .zoom-sp-visual > .image-frame:last-of-type {
+    display: grid;
+    place-items: center;
+    background: #fff;
+  }
+
+  .zoom-sp-visual > .image-frame:last-of-type img {
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.microsoft-teams-sp-visual {
+  display: none;
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .microsoft-teams-stack > .note {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .microsoft-teams-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-rows: auto auto auto;
+    gap: 14px 16px;
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .microsoft-teams-stack {
+    display: contents;
+  }
+
+  .microsoft-teams-stack > .card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .microsoft-teams-stack > .card:nth-child(n + 2),
+  .microsoft-teams-stack > .note {
+    grid-column: 1;
+  }
+
+  .microsoft-teams-stack > .card:nth-child(2) {
+    display: none;
+  }
+
+  .microsoft-teams-stack > .card:nth-child(3) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .microsoft-teams-stack > .note {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .microsoft-teams-stack .section-title br,
+  .microsoft-teams-stack .section-title .title-indent {
+    display: none;
+  }
+
+  .microsoft-teams-stack > .card:first-child .text br {
+    display: none;
+  }
+
+  .microsoft-teams-hero .detail-visual {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    height: 100%;
+    min-height: 0;
+    align-self: stretch;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .microsoft-teams-hero .detail-visual > .image-frame:first-of-type {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .microsoft-teams-hero .detail-visual > .image-frame:first-of-type img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .microsoft-teams-hero .detail-visual > .image-frame:last-of-type {
+    display: grid;
+    place-items: center;
+    background: #fff;
+  }
+
+  .microsoft-teams-hero .detail-visual > .image-frame:last-of-type img {
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 767px) {
+  .microsoft-teams-sp-visual {
+    display: grid;
+    gap: 12px;
+  }
+
+  .microsoft-teams-sp-visual > .image-frame:last-of-type {
+    display: grid;
+    place-items: center;
+    background: #fff;
+  }
+
+  .microsoft-teams-sp-visual > .image-frame:last-of-type img {
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+
+.materials-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.materials-intro {
+  grid-area: intro;
+  display: grid;
+  gap: 14px;
+}
+
+.materials-toc {
+  grid-area: toc;
+  align-self: start;
+}
+
+.materials-visual {
+  grid-area: visual;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.toc-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.toc-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.materials-detail-hero {
+  align-items: start;
+  min-height: 0;
+}
+
+.materials-detail-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.materials-detail-visual {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.materials-resume-visual {
+  align-content: end;
+}
+
+.materials-portfolio-visual {
+  align-content: end;
+}
+
+.materials-curriculum-hero {
+  align-items: start;
+}
+
+.materials-curriculum-column {
+  display: grid;
+  gap: 12px;
+}
+
+.materials-curriculum-benefits {
+  grid-column: 1 / -1;
+}
+
+.materials-curriculum-intro {
+  grid-column: 1 / -1;
+}
+
+.materials-questionnaire-hero .list {
+  line-height: 0.8;
+}
+
+.materials-detail-visual .image-frame {
+  min-height: 220px;
+}
+
+.materials-sp-visual {
+  display: none;
+  margin: 0;
+}
+
+.prompt-box {
+  padding: 16px;
+  border-radius: 16px;
+  background: #edf3ef;
+  border: 1px solid var(--line);
+}
+
+.materials-company-hero .prompt-box {
+  padding: 10px;
+}
+
+.materials-curriculum-hero .prompt-box {
+  padding: 8px;
+}
+
+.prompt-label {
+  margin: 0 0 8px;
+  color: var(--accent-strong);
+  font-weight: 800;
+}
+
+.prompt-text {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+@media (min-width: 1024px) {
+  .materials-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-areas:
+      "intro visual"
+      "toc visual";
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .materials-visual {
+    display: grid;
+    grid-template-rows: 1fr;
+    height: 100%;
+  }
+
+  .materials-visual .image-frame {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .materials-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .materials-detail-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .materials-detail-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+  }
+
+  .materials-detail-stack > .card,
+  .materials-detail-stack > .note,
+  .materials-detail-stack > .materials-sp-visual {
+    flex: 0 0 auto;
+  }
+
+  .materials-detail-visual {
+    align-self: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .materials-detail-visual > .image-frame {
+    min-height: 0;
+  }
+
+  .materials-company-hero .materials-detail-visual {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .materials-company-hero .materials-detail-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: #fff;
+  }
+
+  .materials-curriculum-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .materials-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-areas:
+      "intro visual"
+      "toc visual";
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .materials-visual {
+    display: grid;
+    grid-template-rows: 1fr;
+    height: 100%;
+  }
+
+  .materials-visual .image-frame {
+    height: 100%;
+  }
+
+  .materials-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .materials-detail-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 14px 16px;
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .materials-detail-stack {
+    display: contents;
+  }
+
+  .materials-detail-stack > .card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .materials-detail-stack > .card:nth-child(n + 2),
+  .materials-detail-stack > .note {
+    grid-column: 1;
+  }
+
+  .materials-detail-stack .section-title br,
+  .materials-detail-stack .section-title .title-indent {
+    display: none;
+  }
+
+  .materials-company-hero .materials-detail-stack > .card:first-child .text br {
+    display: none;
+  }
+
+  .materials-resume-hero .materials-detail-stack > .card:first-child .text br {
+    display: none;
+  }
+
+  .materials-portfolio-hero .materials-detail-stack > .card:first-child .text br,
+  .materials-portfolio-hero .materials-detail-stack > .card:nth-child(2) .text br,
+  .materials-portfolio-hero .materials-detail-stack > .note .text br {
+    display: none;
+  }
+
+  .materials-detail-visual {
+    grid-column: 2;
+    grid-row: 2 / span 3;
+    height: auto;
+    align-self: end;
+  }
+
+  .materials-resume-visual > .image-frame:last-of-type {
+    display: grid;
+    place-items: center;
+    background: #8DB3D9;
+  }
+
+  .materials-resume-visual > .image-frame:last-of-type img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .materials-curriculum-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 767px) {
+  .materials-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "toc";
+  }
+
+  .materials-visual {
+    display: none;
+  }
+
+  .materials-detail-visual {
+    display: none;
+  }
+
+  .materials-sp-visual {
+    display: grid;
+    gap: 12px;
+  }
+}
+
+.support-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.support-intro {
+  grid-area: intro;
+  display: grid;
+  gap: 14px;
+}
+
+.support-toc {
+  grid-area: toc;
+  align-self: start;
+}
+
+.support-visual {
+  grid-area: visual;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.support-detail-hero {
+  align-items: start;
+  min-height: 0;
+}
+
+.support-detail-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.support-detail-visual {
+  display: grid;
+  gap: 14px;
+  align-content: end;
+}
+
+.support-detail-visual .image-frame {
+  min-height: 220px;
+}
+
+.support-reflection-hero {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 1024px) {
+  .support-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-areas:
+      "intro visual"
+      "toc visual";
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .support-visual {
+    display: grid;
+    grid-template-rows: 1fr;
+    height: 100%;
+  }
+
+  .support-visual .image-frame {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .support-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .support-detail-hero {
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .support-detail-stack {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .support-detail-visual {
+    align-self: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .support-detail-visual > .image-frame {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .support-detail-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .support-job-understanding-hero .support-detail-stack {
+    display: grid;
+  }
+
+  .support-job-understanding-hero .text {
+    line-height: 1.1;
+  }
+
+  .support-reflection-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .support-reflection-intro,
+  .support-reflection-note {
+    grid-column: 1 / -1;
+  }
+
+  .support-mock-interview-hero .support-detail-visual {
+    align-self: end;
+    height: auto;
+    justify-items: center;
+  }
+
+  .support-mock-interview-hero .support-detail-visual > .image-frame {
+    height: auto;
+    width: 100%;
+    display: grid;
+    place-items: center;
+  }
+
+  .support-mock-interview-hero .support-detail-visual img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 702px;
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .support-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    grid-template-areas:
+      "intro visual"
+      "toc visual";
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .support-visual {
+    display: grid;
+    grid-template-rows: 1fr;
+    height: 100%;
+  }
+
+  .support-visual .image-frame {
+    height: 100%;
+  }
+
+  .support-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1100px) {
+  .page-lead,
+  .text,
+  .list,
+  .number-list,
+  .caption {
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 767px) {
+  .support-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "toc";
+  }
+
+  .support-visual,
+  .support-detail-visual {
+    display: none;
+  }
+}
+
+.closing-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+}
+
+.closing-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.closing-intro,
+.closing-checklist-heading,
+.closing-summary {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .closing-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+
+html { min-height: 100%; }
+body.guide-app {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 0, rgba(72, 107, 97, 0.18), transparent 34%),
+    linear-gradient(160deg, var(--bg), var(--bg2));
+}
+.app-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  backdrop-filter: blur(12px);
+  background: rgba(248, 250, 248, 0.92);
+  border-bottom: 1px solid var(--line);
+}
+.app-navbar .navbar-brand {
+  font-weight: 800;
+  color: var(--accent-strong);
+}
+.app-navbar .nav-link {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+.app-toolbar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.app-toolbar .form-select {
+  min-width: min(420px, 100%);
+  border-radius: 999px;
+}
+.guide-page { display: none; }
+.guide-page.is-active { display: block; }
+.slide-body-wrap { display: contents; }
+.image-placeholder {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #edf3ef, #f8faf8);
+  min-height: 220px;
+  border-style: dashed;
+  border-width: 2px;
+  border-color: #95aba1;
+}
+.image-placeholder-inner {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  width: 100%;
+  text-align: center;
+}
+.image-placeholder-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  min-height: 28px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #dfe9e4;
+  color: var(--accent-strong);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.image-placeholder-files code {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid var(--line);
+  color: var(--accent-strong);
+  font-size: 0.88rem;
+  white-space: normal;
+  word-break: break-all;
+}
+.image-placeholder-size {
+  color: var(--accent-strong);
+  font-weight: 800;
+}
+.image-placeholder-note {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.global-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #edf3ef;
+  border: 1px solid var(--line);
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+.global-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: #c9d8d0;
+  overflow: hidden;
+}
+.global-progress-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #89a399, #486b61);
+  width: 0%;
+  transition: width 160ms ease;
+}
+.global-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(238, 243, 239, 0.94);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+}
+.global-footer .btn { border-radius: 999px; font-weight: 700; }
+.global-footer .btn-success { background-color: var(--accent); border-color: var(--accent); }
+.global-footer .btn-success:hover { background-color: var(--accent-strong); border-color: var(--accent-strong); }
+@media (max-width: 767px) {
+  .app-toolbar { align-items: stretch; }
+  .app-toolbar .form-select { min-width: 100%; }
+}
+
+  </style>
+</head>
+<body class="guide-app">
+  <header class="app-navbar">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid px-3 px-lg-4">
+        <a class="navbar-brand" href="#index">Web面接ガイド</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#appNav" aria-controls="appNav" aria-expanded="false" aria-label="ナビゲーションを切り替え">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="appNav">
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#index">Index</a></li><li class="nav-item"><a class="nav-link" href="#pre-interview-checks">第1章</a></li><li class="nav-item"><a class="nav-link" href="#materials-preparation">第2章</a></li><li class="nav-item"><a class="nav-link" href="#chatgpt-support">第3章</a></li><li class="nav-item"><a class="nav-link" href="#closing">第4章</a></li>
+          </ul>
+          <div class="app-toolbar">
+            <span class="global-status" id="globalStatus">1 / 21</span>
+            <select id="pageSelect" class="form-select" aria-label="ページ選択">
+              <option value="#index">1. Web面接に向けた事前準備と対策</option><option value="#pre-interview-checks">2. Web面接前に確認しておきたいこと</option><option value="#usage-device">3. 1-1. 使用機材の確認</option><option value="#audio-camera-desktop">4. 1-2. 音量とカメラの調整 と デスクトップのレイアウト</option><option value="#environment-notifications">5. 1-3. 映像・背景・周囲の環境と通知の停止</option><option value="#platform-overview">6. 1-4. 面接で使用されやすいプラットフォームに慣れておく</option><option value="#google-meet">7. 1-4_a. Google Meetの確認ポイント</option><option value="#zoom">8. 1-4_b. Zoom の確認ポイント</option><option value="#microsoft-teams">9. 1-4_a. Microsoft Teams の確認ポイント</option><option value="#materials-preparation">10. 2. 面接資料の準備方法</option><option value="#company-information">11. 2-1. 応募先企業の情報および求人情報</option><option value="#resume-career-history">12. 2-2. 自身の履歴書・職務経歴書</option><option value="#portfolio">13. 2-3. 自身のポートフォリオ</option><option value="#curriculum-learning-log">14. 2-4. 職業訓練校のカリキュラムと学習記録</option><option value="#company-questionnaire">15. 2-5. 企業アンケートも有効活用</option><option value="#chatgpt-support">16. 3. ChatGPTを活用した面接準備の進め方</option><option value="#job-understanding">17. 3-1. 求人内容の理解を深め、訓練校での学びを話せる形に整理する</option><option value="#reflection-memo">18. 3-2. 自分用の振り返りメモは役割を分けて活用する</option><option value="#mock-qa">19. 3-3. 想定問答集を作成する</option><option value="#mock-interview">20. 3-4. ChatGPTと模擬面接を行う</option><option value="#closing">21. 4. 最後に</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="global-footer py-3 px-3 px-lg-4">
+    <div class="container-fluid px-0">
+      <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-3">
+        <div class="d-flex gap-2">
+          <button id="globalPrev" class="btn btn-outline-secondary" type="button">前へ</button>
+          <button id="globalNext" class="btn btn-success" type="button">次へ</button>
+        </div>
+        <div class="flex-grow-1">
+          <div class="global-progress"><div id="globalProgress" class="global-progress-bar"></div></div>
+        </div>
+        <div class="text-secondary small">切替時に必ず先頭へ戻るようにしています</div>
+      </div>
+    </div>
+  </div>
+
+  
+<article id="index" class="guide-page" hidden data-index="0" data-title="Web面接に向けた事前準備と対策" data-eyebrow="Web Interview Guide" data-label="0 / 4">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">Web Interview Guide</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#index">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <span class="pager-link is-secondary is-disabled">前へ</span>
+              <div class="page-number">0 / 4</div>
+              <a class="pager-link" href="#pre-interview-checks">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="page-title" class="hero-grid">
+<article class="card index-intro">
+<h1 class="page-title" id="page-title">0. Web面接に向けた<br/> 事前準備と対策</h1>
+<p class="page-lead">本資料は、Web面接を受ける際に慌てないために、事前環境から当日までを順番に整理して確認できるようにしたガイドです。<br/>
+              事前確認、当日準備、資料整理、そしてChatGPTを活用した準備までを段階的に見直せるようにしています。</p>
+<div class="note">
+<p class="text">まずは全体をつかみ、必要なページから順番に進めてください。章トップから、その章の詳細ページへ移れる構成にしています。</p>
+</div>
+</article>
+<nav aria-labelledby="toc-title" class="stack index-toc">
+<div class="toc-heading">
+<h2 class="section-title" id="toc-title">目次</h2>
+<p class="toc-note">気になる項目から詳細ページへ移動できます</p>
+</div>
+<div class="link-list">
+<a href="#pre-interview-checks">
+<div aria-hidden="true" class="link-index">1</div>
+<div>
+<h3 class="link-title">Web面接前に確認しておきたいこと</h3>
+</div>
+</a>
+<a href="#materials-preparation">
+<div aria-hidden="true" class="link-index">2</div>
+<div>
+<h3 class="link-title">面接資料の準備方法</h3>
+</div>
+</a>
+<a href="#chatgpt-support">
+<div aria-hidden="true" class="link-index">3</div>
+<div>
+<h3 class="link-title">ChatGPTを活用した面接準備の進め方</h3>
+</div>
+</a>
+<a href="#closing">
+<div aria-hidden="true" class="link-index">4</div>
+<div>
+<h3 class="link-title">最後に</h3>
+</div>
+</a>
+</div>
+</nav>
+<aside aria-label="案内イメージ" class="image-panel hero-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>image/ウェブデザイン学習の風景.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <span class="pager-link is-secondary is-disabled">前へ</span>
+              <div class="page-number">0 / 4</div>
+              <a class="pager-link" href="#pre-interview-checks">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 4.76%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="pre-interview-checks" class="guide-page" hidden data-index="1" data-title="Web面接前に確認しておきたいこと" data-eyebrow="Section 1" data-label="1 / 6">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">Section 1</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#pre-interview-checks">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#index">前へ</a>
+              <div class="page-number">1 / 6</div>
+              <a class="pager-link" href="#usage-device">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="chapter-title" class="chapter-grid">
+<article class="card chapter-intro">
+<h1 class="page-title" id="chapter-title">1. Web面接前に<br/> 確認しておきたいこと</h1>
+<p class="page-lead">第1章では、Web面接の前に確認しておきたい項目を整理します。<br/>
+              機材、ツール操作、画面環境を事前に整えておくことで、<br/>
+              面接当日の進行と印象を安定させやすくなります。</p>
+<div class="note">
+<p class="text">本項では、ノートパソコンのハード・ソフトウェア設定や、<br/>
+                Web会議ツールの説明を行います。<br/>
+                普段は意識せず使えている方も多いと思いますが、<br/>
+                面接当日に慌てないよう、改めて確認しましょう。</p>
+</div>
+</article>
+<nav aria-labelledby="toc-title" class="stack chapter-toc">
+<div class="toc-heading">
+<h2 class="block-title" id="toc-title">第1章の目次</h2>
+<p class="toc-note">各項目から詳細ページへ移動します</p>
+</div>
+<div class="link-list">
+<a href="#usage-device">
+<div aria-hidden="true" class="link-index">1-1</div>
+<div>
+<h3 class="link-title">使用機材の確認</h3>
+<p class="link-text">カメラ、マイク、音量、充電、表示設定などの基本を確認します。</p>
+</div>
+</a>
+<a href="#audio-camera-desktop">
+<div aria-hidden="true" class="link-index">1-2</div>
+<div>
+<h3 class="link-title">音量の調整とデスクトップのレイアウト</h3>
+<p class="link-text">音声調整と画面配置の仕方を確認します。</p>
+</div>
+</a>
+<a href="#environment-notifications">
+<div aria-hidden="true" class="link-index">1-3</div>
+<div>
+<h3 class="link-title">映像・背景・周囲の環境と通知の停止</h3>
+<p class="link-text">映り方と通知制御をまとめて確認します。</p>
+</div>
+</a>
+<a href="#platform-overview">
+<div aria-hidden="true" class="link-index">1-4</div>
+<div>
+<h3 class="link-title">使用されやすいWeb会議ツールに慣れておく</h3>
+<p class="link-text">Web会議ツールの使用法と注意点を見ます。</p>
+</div>
+</a>
+</div>
+</nav>
+<aside aria-label="第1章イメージ" class="image-panel chapter-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>image/ウェブインタビュー準備の瞬間.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#index">前へ</a>
+              <div class="page-number">1 / 6</div>
+              <a class="pager-link" href="#usage-device">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 9.52%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="usage-device" class="guide-page" hidden data-index="2" data-title="1-1. 使用機材の確認" data-eyebrow="1-1 Usage Device" data-label="1-1">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">1-1 Usage Device</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#pre-interview-checks">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#pre-interview-checks">前へ</a>
+              <div class="page-number">1-1</div>
+              <a class="pager-link" href="#audio-camera-desktop">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid detail-hero usage-device-hero">
+<div class="stack usage-device-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">1-1. 使用機材の確認</h1>
+<p class="text">まずは、面接で使用するパソコンや周辺機器の扱いに慣れておきましょう。<br/>
+                映像と音声が安定して出る状態を作ることはWeb面接における第一歩です。</p>
+</article>
+<article class="card">
+<h2 class="block-title">確認しておきたい項目</h2><br/>
+<ul class="list">
+<li>支給されるノートパソコンのカメラ位置<br/>※当校で貸し出すノートパソコンのカメラは普段はスライドで閉められています</li>
+<li>マイクの位置やスピーカーの音量/Fnロックの確認</li>
+<li>充電状態、電源ケーブルの接続</li>
+<li>外付けモニターを使用する場合の表示設定</li>
+<li>通信環境の確認</li>
+</ul>
+</article>
+<article class="note">
+<p class="text">上述の通り、当校で貸し出すノートパソコンのカメラは、<br/>画面上部のスライド式カバーで隠れています。<br/>面接前に、カメラが使用可能な状態か確認しましょう。</p>
+<p class="text">音量は、音量ミキサーやキーボードのFキーで調整できます。<br/>事前に操作方法を確認しましょう。</p>
+<p class="text">Fnキーのロック状態で操作方法が変わるため、<br/>ロック解除方法も確認しておくと安全です。</p>
+<p class="text">また、本校として、Wi-Fiはできる限り安定に努めていますが、<br/>面談室以外を使用する場合は留意してください。<br/>
+                有線接続や別回線、再入室手段を用意しておくと、<br/>面接時の不安を減らせます。</p>
+</article>
+</div>
+<aside aria-label="使用機材のイメージ" class="image-panel detail-visual usage-device-visual">
+<div class="image-frame image-placeholder picture-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/ノートパソコン画面_960px以下.png</code><br/><code>../image/ノートパソコン画面.png</code></div><div class="image-placeholder-size">表示枠サイズ: 960 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/キーボードFnキー.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#pre-interview-checks">前へ</a>
+              <div class="page-number">1-1</div>
+              <a class="pager-link" href="#audio-camera-desktop">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 14.29%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="audio-camera-desktop" class="guide-page" hidden data-index="3" data-title="1-2. 音量とカメラの調整 と デスクトップのレイアウト" data-eyebrow="1-2 Audio Camera Desktop" data-label="1-2">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">1-2 Audio Camera Desktop</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#pre-interview-checks">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#usage-device">前へ</a>
+              <div class="page-number">1-2</div>
+              <a class="pager-link" href="#environment-notifications">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid detail-hero audio-camera-hero">
+<div class="stack audio-camera-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">1-2. 音量の調整と<br/>
+<span class="title-indent">    </span>デスクトップのレイアウト</h1>
+<p class="text">音声と映像は、面接時の第一印象を大きく左右します。<br/>
+                あわせて、資料を見ながら自然に話せる画面配置も整えておくと安心です。</p>
+</article>
+<article class="card">
+<h2 class="block-title">音量の調整</h2><br/>
+<ul class="list">
+<li>音量ミキサーの開き方を確認しましょう</li>
+<li>事前に音量設定を行いましょう</li>
+<li>自分の声が聞き取りやすいかテストしてみましょう</li>
+<li>講義中はミュートにし、面接時のみ解除する運用にすると便利です</li>
+</ul>
+<figure class="audio-camera-sp-image">
+<div class="image-frame image-placeholder loose-image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/音量ミキサー.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</figure>
+</article>
+<article class="card">
+<h2 class="block-title">デスクトップレイアウト</h2><br/>
+<ul class="list">
+<li>面談室にはモニターを用意しています。<br/>デュアルモニターを活用しましょう</li>
+<li>Web会議ツール用と資料確認用にモニターを分けると<br/>
+                  資料の確認に役立ちます</li>
+<li>ただし、視線移動が不自然にならない配置にすることが大切です</li>
+</ul>
+<figure class="audio-camera-sp-image">
+<div class="image-frame image-placeholder loose-image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/マルチディスプレイ説明.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</figure>
+</article>
+<article class="note">
+<p class="text">ノートパソコン側をWeb会議ツール用にし、<br/>
+                外部モニターを資料表示用にするなど、<br/>
+              自身にあったレイアウトを設定しましょう。<br/>
+            ※注意点としてマウスカーソルが迷子にならないように、<br/>
+             配置した設定も忘れないように気をつけましょう。</p>
+</article>
+</div>
+<aside aria-label="マイク・カメラ・デスクトップイメージ" class="image-panel detail-visual audio-camera-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/音量ミキサー.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder picture-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/マルチディスプレイ説明タブレット用.png</code><br/><code>../image/マルチディスプレイ説明.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1024 × 768</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#usage-device">前へ</a>
+              <div class="page-number">1-2</div>
+              <a class="pager-link" href="#environment-notifications">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 19.05%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="environment-notifications" class="guide-page" hidden data-index="4" data-title="1-3. 映像・背景・周囲の環境と通知の停止" data-eyebrow="1-3 Environment Notifications" data-label="1-3">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">1-3 Environment Notifications</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#pre-interview-checks">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#audio-camera-desktop">前へ</a>
+              <div class="page-number">1-3</div>
+              <a class="pager-link" href="#platform-overview">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid detail-hero environment-notifications-hero">
+<div class="stack environment-notifications-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">1-3. 映像・背景・周囲の環境と<br/>
+<span class="title-indent">    </span>通知の停止</h1>
+<p class="text">話の内容だけでなく、映り方や周囲の環境も面接の印象に影響します。<br/>
+                通知の停止もあわせて、集中を妨げる要素を減らしておきましょう。</p>
+</article>
+<article class="card">
+<h2 class="block-title">カメラ・背景・環境</h2><br/>
+<ul class="list">
+<li>顔が画角から切れていないか確認する</li>
+<li>表情が見える明るさになっているか確認する</li>
+<li>面接にふさわしい服装がどう見えるか確認する</li>
+<li>背景に不要な物が映り込まないようにする</li>
+<li>生活音や話し声が入りにくい場所を選ぶ</li>
+</ul></article>
+<article class="card">
+<h2 class="block-title">通知停止</h2><br/>
+<ul class="list">
+<li>スマートフォンの着信音や通知音</li>
+<li>カレンダー・チャットの通知</li>
+<li>OSの通知</li>
+</ul>
+</article>
+<article class="note">
+<p class="text">通知音やポップアップは集中を途切れさせるだけでなく、<br/>
+                画面共有時には情報漏えいのリスクにもつながります。<br/>
+                特にOSの通知は事前に音量ミキサーも含めて確認しておくと安全です。<br/>
+                また、面談室以外での面接は周囲の生活音や<br/>
+                背景に不要なものが映りこまないように気をつけましょう
+              </p>
+</article>
+</div>
+<aside aria-label="OS通知停止のイメージ" class="image-panel detail-visual environment-notifications-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/OS通知停止.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#audio-camera-desktop">前へ</a>
+              <div class="page-number">1-3</div>
+              <a class="pager-link" href="#platform-overview">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 23.81%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="platform-overview" class="guide-page" hidden data-index="5" data-title="1-4. 面接で使用されやすいプラットフォームに慣れておく" data-eyebrow="1-4 Platform Overview" data-label="1-4">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">1-4 Platform Overview</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#pre-interview-checks">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#environment-notifications">前へ</a>
+              <div class="page-number">1-4</div>
+              <a class="pager-link" href="#google-meet">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid detail-hero platform-overview-hero">
+<div class="stack platform-overview-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">1-4. 面接で使用されやすい<br/>
+<span class="title-indent">    </span>プラットフォームに慣れておく</h1>
+</article>
+<article class="card">
+<h2 class="block-title">主な対象ツール</h2>
+<div aria-label="主な対象ツール" class="platform-tool-list">
+<a class="platform-tool-link" href="#google-meet">
+<span class="platform-tool-name">Google Meet</span>
+<span class="platform-tool-text">アプリのインストールが不要でブラウザから1クリックで参加できるため、PCでの接続トラブルが最も起きにくい。</span>
+</a>
+<a class="platform-tool-link" href="#zoom">
+<span class="platform-tool-name">Zoom</span>
+<span class="platform-tool-text">自分の映りを確認・調整できる「外見補正」や「低照度調整」が優秀で、表情を明るく健康的に見せやすい。</span>
+</a>
+<a class="platform-tool-link" href="#microsoft-teams">
+<span class="platform-tool-name">Microsoft Teams</span>
+<span class="platform-tool-text">事前に共有された資料（PDFやPPT）を会議画面内で自分のペースで読み返せる機能があり、企業側の情報把握がしやすい。</span>
+</a>
+</div>
+</article>
+<article class="note">
+<h2 class="block-title">共通して確認したいこと</h2>
+<ul class="list">
+<li>表示名が本名になっているか確認する</li>
+<li>入室方法を確認する</li>
+<li>マイク設定、カメラ設定、画面共有位置を把握する</li>
+<li>背景変更機能は必要な場合だけ使う</li>
+</ul>
+</article>
+</div>
+<aside aria-label="プラットフォームのイメージ" class="image-panel detail-visual platform-overview-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/Web面接を受ける女性.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#environment-notifications">前へ</a>
+              <div class="page-number">1-4</div>
+              <a class="pager-link" href="#google-meet">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 28.57%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="google-meet" class="guide-page" hidden data-index="6" data-title="1-4_a. Google Meetの確認ポイント" data-eyebrow="1-4a Google Meet" data-label="1-4a">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">1-4a Google Meet</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#pre-interview-checks">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#platform-overview">前へ</a>
+              <div class="page-number">1-4a</div>
+              <a class="pager-link" href="#zoom">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid detail-hero google-meet-hero">
+<div class="stack google-meet-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">1-4_a. Google Meetの確認ポイント</h1>
+<p class="text">Google Meet は、アプリのインストールが不要で、<br/>
+                ブラウザから1クリックで参加できるため、<br/>
+                PCでの接続トラブルが起きにくいです。</p>
+</article>
+<article class="card">
+<p class="text">Google Meet は、Web面接で使用されることの多いオンライン面談ツールです。<br/>
+                入室前に、マイク・カメラ・表示名が正しく設定されているかを確認しておくことが大切です。<br/>
+                面接中は、必要な操作を落ち着いて行えるよう、<br/>
+                よく使うアイコンの位置を事前に把握しておきましょう。</p>
+</article>
+<article class="card">
+<ul class="list">
+<li>マイク：自分の音声のON/OFFを切り替えます。</li>
+<li>ビデオ：カメラのON/OFFを切り替えます。</li>
+<li>手を挙げる：発言したいときに意思表示できます。</li>
+<li>画面を共有：資料や作品を相手に見せたいときに使用します。<br/>※共有前は通知や不要な画面が映らないよう注意が必要です。</li>
+<li>メッセージ：チャットで連絡事項を送るときに使います。<br/>※接続トラブル時の補助連絡にも役立ちます。</li>
+<li>参加者：面接官や同席者の一覧を確認できます。</li>
+<li>設定：使用するマイクやカメラ、スピーカーを切り替えるときに確認します。</li>
+<li>通話終了：面接終了時に押して退出します。</li>
+</ul>
+</article>
+<figure class="google-meet-sp-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/Google Meetの基本画面.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/Google Meetのアイコン.png</code></div><div class="image-placeholder-size">表示枠サイズ: 420 × 420</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</figure>
+<article class="note">
+<p class="text">面接直前に慌てないためにも、Google Meet は一度事前に開き、<br/>
+                どこに何のボタンがあるかを確認しておくことが重要です。<br/>
+                ※この資料は2026年4月現在のものです。必要最新の状態を確認してください。</p>
+</article>
+</div>
+<aside aria-label="Google Meet の画面とアイコン" class="image-panel detail-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/Google Meetの基本画面.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/Google Meetのアイコン.png</code></div><div class="image-placeholder-size">表示枠サイズ: 420 × 420</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#platform-overview">前へ</a>
+              <div class="page-number">1-4a</div>
+              <a class="pager-link" href="#zoom">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 33.33%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="zoom" class="guide-page" hidden data-index="7" data-title="1-4_b. Zoom の確認ポイント" data-eyebrow="1-4b Zoom" data-label="1-4b">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">1-4b Zoom</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#pre-interview-checks">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#google-meet">前へ</a>
+              <div class="page-number">1-4b</div>
+              <a class="pager-link" href="#microsoft-teams">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid detail-hero zoom-hero">
+<div class="stack zoom-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">1-4_b. Zoom の確認ポイント</h1>
+<p class="text">Zoom は、自分の映りを確認・調整できる「外見補正」や「低照度調整」が優秀で、<br/>
+                表情を明るく健康的に見せやすいです。</p>
+</article>
+<article class="card">
+<p class="text">Zoom は、Web面接で使用されることの多いオンライン会議ツールです。<br/>
+                入室前に、マイク・カメラ・表示名が正しく設定されているかを確認しましょう。<br/>
+                面接中に慌てないよう、ボタンの位置や役割を事前に把握しておきましょう。</p>
+</article>
+<article class="card">
+<ul class="list">
+<li>マイク：自分の音声のON/OFFを切り替えます。</li>
+<li>ビデオ：カメラのON/OFFを切り替えます。</li>
+<li>参加者：参加者の一覧を表示します。</li>
+<li>チャット：文字でメッセージを送受信できます。<br/>※接続トラブル時の連絡手段として使われることもあります。</li>
+<li>画面共有：資料や作品を相手に見せるときに使用します。<br/>※共有前は、不要なタブや通知が映らないよう注意が必要です。</li>
+<li>反応：リアクションや手を挙げる操作ができます。</li>
+<li>レコーディング：会議を録画する機能です。<br/>※面接では自分で判断せず、必要がある場合のみ指示に従うのが安全です。</li>
+<li>終了：会議を退出するときに使用します。面接終了後、案内に従って落ち着いて退出しましょう。</li>
+</ul>
+</article>
+<figure class="zoom-sp-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/zoom基本画面.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/zoomアイコン.png</code></div><div class="image-placeholder-size">表示枠サイズ: 420 × 420</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</figure>
+<article class="note">
+<p class="text">Zoom も Google Meet と同様に、面接直前に初めて触るのではなく、<br/>
+                事前に一度開いてどこに何のボタンがあるかを確認しておくことが重要です。<br/>
+              ※この資料は2026年4月現在のものです。必要最新の状態を確認してください。</p>
+</article>
+</div>
+<aside aria-label="Zoom の画面とアイコン" class="image-panel detail-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/zoom基本画面.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/zoomアイコン.png</code></div><div class="image-placeholder-size">表示枠サイズ: 420 × 420</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#google-meet">前へ</a>
+              <div class="page-number">1-4b</div>
+              <a class="pager-link" href="#microsoft-teams">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 38.10%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="microsoft-teams" class="guide-page" hidden data-index="8" data-title="1-4_a. Microsoft Teams の確認ポイント" data-eyebrow="1-4c Microsoft Teams" data-label="1-4c">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">1-4c Microsoft Teams</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#pre-interview-checks">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#zoom">前へ</a>
+              <div class="page-number">1-4c</div>
+              <a class="pager-link" href="#materials-preparation">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid detail-hero microsoft-teams-hero">
+<div class="stack microsoft-teams-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">1-4_a. Microsoft Teams の確認ポイント</h1>
+<p class="text">Microsoft Teams は事前に共有された資料（PDFやPPT）を<br/>
+                画面内で読み返せる機能があり、企業側の情報把握がしやすいです。</p>
+</article>
+<article class="card">
+<p class="text">入室前に、マイク・カメラ・表示名が正しく設定されているかを確認しておくことが大切です。<br/>
+                面接中に迷わないよう、よく使うボタンの位置や役割を事前に把握しておきましょう。<br/>
+                面接開始前に、自分の声が入るか、カメラが映るか、相手の音声が聞こえるかを一通り確認しておくと安心です。</p>
+</article>
+<article class="card">
+<ul class="list">
+<li>チャット：文字でメッセージを送受信できます。接続トラブル時の補足連絡に使われることもあります。</li>
+<li>参加者：面接官や同席者の一覧を確認できます。複数人が参加している場合に便利です。</li>
+<li>反応：リアクションを送る機能です。状況によっては意思表示の補助として使われます。</li>
+<li>挙手：発言したいときに手を挙げて知らせる機能です。複数人の場で順番を待つときに役立ちます。</li>
+<li>表示：参加者の並び方や画面レイアウトを切り替える機能です。見やすい表示に調整できます。</li>
+<li>マイク：自分の音声のON/OFFを切り替えます。</li>
+<li>カメラ：カメラのON/OFFを切り替えます。</li>
+<li>画面共有：資料や作品を相手に見せたいときに使用します。<br/>※共有前は通知や不要な画面が映らないよう注意が必要です。</li>
+<li>退出：面接終了時に押して会議から退出します。終了後は案内に従って落ち着いて退出しましょう。</li>
+</ul>
+</article>
+<figure class="microsoft-teams-sp-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/teams参加説明.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/teamsアイコン.png</code></div><div class="image-placeholder-size">表示枠サイズ: 420 × 420</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</figure>
+<article class="note">
+<p class="text">Microsoft Teams も、Google Meet や Zoom と同様に、面接直前に初めて触るのではなく、事前に一度開いてどこに何のボタンがあるかを確認しておくことが重要です。</p>
+</article>
+</div>
+<aside aria-label="Microsoft Teams の画面とアイコン" class="image-panel detail-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/teams参加説明.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/teamsアイコン.png</code></div><div class="image-placeholder-size">表示枠サイズ: 420 × 420</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#zoom">前へ</a>
+              <div class="page-number">1-4c</div>
+              <a class="pager-link" href="#materials-preparation">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 42.86%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="materials-preparation" class="guide-page" hidden data-index="9" data-title="2. 面接資料の準備方法" data-eyebrow="Section 2" data-label="2 / 6">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">Section 2</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#materials-preparation">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#microsoft-teams">前へ</a>
+              <div class="page-number">2 / 6</div>
+              <a class="pager-link" href="#company-information">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="chapter-title" class="materials-grid">
+<article class="card materials-intro">
+<h1 class="page-title" id="chapter-title">2. 面接資料の準備方法</h1>
+<p class="page-lead">Web面接では、想定問答や企業理解を深める為の資料を<br/>
+              事前に準備しておくと役立ちます。<br/>
+              その際、<strong>ChatGPTのプロジェクト機能</strong>を活用すると、<br/>
+              情報整理や資料作成を進めやすくなります。</p>
+<div class="note">
+<p class="text">準備しておきたい情報は、主に次の4つです。<br/>
+                応募企業、自分の提出書類、ポートフォリオ、<br/>
+                そして訓練校での学習内容を整理しておくと、<br/>
+                第3章のChatGPT活用にもつなげやすくなります。</p>
+</div>
+</article>
+<nav aria-labelledby="toc-title" class="stack materials-toc">
+<div class="toc-heading">
+<h2 class="block-title" id="toc-title">第2章の目次</h2>
+<p class="toc-note">必要な項目から詳細ページへ移動できます</p>
+</div>
+<div class="link-list">
+<a href="#company-information">
+<div aria-hidden="true" class="link-index">2-1</div>
+<div>
+<h3 class="link-title">応募先企業の情報および求人情報</h3>
+<p class="link-text">求人情報URL、企業サイト、採用ページ、媒体差異を整理します。</p>
+</div>
+</a>
+<a href="#resume-career-history">
+<div aria-hidden="true" class="link-index">2-2</div>
+<div>
+<h3 class="link-title">自身の履歴書・職務経歴書</h3>
+<p class="link-text">提出済み書類を基準資料として扱う考え方を整理します。</p>
+</div>
+</a>
+<a href="#portfolio">
+<div aria-hidden="true" class="link-index">2-3</div>
+<div>
+<h3 class="link-title">自身のポートフォリオ</h3>
+<p class="link-text">作品整理、README、AI活用範囲の扱いをまとめます。</p>
+</div>
+</a>
+<a href="#curriculum-learning-log">
+<div aria-hidden="true" class="link-index">2-4</div>
+<div>
+<h3 class="link-title">職業訓練校のカリキュラムおよび学習記録</h3>
+<p class="link-text">学習内容の共有方法と、面接での言語化につながる記録方法を整理します。</p>
+</div>
+</a>
+<a href="#company-questionnaire">
+<div aria-hidden="true" class="link-index">2-5</div>
+<div>
+<h3 class="link-title">企業アンケートも有効活用</h3>
+<p class="link-text">面接前に企業からアンケートへの回答が求められることがあります</p>
+</div>
+</a>
+</div>
+</nav>
+<aside aria-label="面接資料準備のイメージ" class="image-panel materials-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>image/仕事の準備と求職活動.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#microsoft-teams">前へ</a>
+              <div class="page-number">2 / 6</div>
+              <a class="pager-link" href="#company-information">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 47.62%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="company-information" class="guide-page" hidden data-index="10" data-title="2-1. 応募先企業の情報および求人情報" data-eyebrow="2-1 Company Information" data-label="2-1">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">2-1 Company Information</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#materials-preparation">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#materials-preparation">前へ</a>
+              <div class="page-number">2-1</div>
+              <a class="pager-link" href="#resume-career-history">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid materials-detail-hero materials-company-hero">
+<div class="stack materials-detail-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">2-1. 応募先企業の情報および求人情報</h1>
+<p class="text">まず、応募先企業について調べるための情報を整理します。<br/>
+                ChatGPT のプロジェクト内で整理しておくと、<br/>
+                企業理解と想定問答の土台を作りやすくなります。</p>
+</article>
+<article class="card">
+<h2 class="block-title">確認しておきたいもの</h2><br/>
+<ul class="list">
+<li>求人情報のURL</li>
+<li>企業公式サイトのURL</li>
+<li>企業公式サイト内の採用ページ</li>
+<li>求人媒体に掲載されている内容と、公式採用ページの内容との差異</li>
+</ul>
+</article>
+<article class="card">
+<h2 class="block-title">進め方</h2>
+<p class="text">ChatGPTのプロジェクト内に、テキストで以下のように整理しておくと管理しやすくなります。</p><br/>
+<div class="prompt-box">
+<p class="prompt-label">記録例</p>
+<p class="prompt-text">求人情報URL：<br/>企業URL：</p>
+</div>
+</article>
+<figure class="materials-sp-visual">
+<div class="image-frame image-placeholder modal-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/プロジェクトの説明1.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder modal-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/プロジェクトの説明2.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</figure>
+<article class="note">
+<h2 class="block-title">注意点</h2>
+<p class="text">求人サイトのURLは、会員専用ページである場合があります。<br/>
+                その場合は、別ブラウザや別アカウントでも閲覧できるか確認し、<br/>
+                誰でも確認できるURLを記載しておくと扱いやすくなります。</p>
+<p class="text">また、求人媒体と企業公式サイトで募集内容に差異がある場合は、<br/>
+                その違いも確認しておくと、面接時の理解が深まります。</p>
+</article>
+</div>
+<aside aria-label="企業研究のイメージ" class="image-panel materials-detail-visual">
+<div class="image-frame image-placeholder modal-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/プロジェクトの説明1.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder modal-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/プロジェクトの説明2.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#materials-preparation">前へ</a>
+              <div class="page-number">2-1</div>
+              <a class="pager-link" href="#resume-career-history">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 52.38%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="resume-career-history" class="guide-page" hidden data-index="11" data-title="2-2. 自身の履歴書・職務経歴書" data-eyebrow="2-2 Resume / Career History" data-label="2-2">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">2-2 Resume / Career History</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#materials-preparation">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#company-information">前へ</a>
+              <div class="page-number">2-2</div>
+              <a class="pager-link" href="#portfolio">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid materials-detail-hero materials-resume-hero">
+<div class="stack materials-detail-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">2-2. 自身の履歴書・職務経歴書</h1>
+<p class="text">応募企業とのやり取りに使用した履歴書・職務経歴書は、<br/>
+                面接準備において非常に重要です。</p>
+<p class="text">面接では、提出済み書類に基づいて質問されることが多いため、<br/>
+                基準にする資料を明確にしておきましょう。</p>
+</article>
+<article class="card">
+<h2 class="block-title">基本方針</h2><br/>
+<ul class="list">
+<li>すでに送付済みであれば、送付済みの最新版を情報源にする</li>
+<li>まだ送付前であれば、応募企業向けに内容を整えたうえで送付し、<br/>その送付版を情報源にする</li>
+<li>送付済みであっても、応募企業ごとに内容を変えるのは避ける<br/>※同じ履歴書や職務経歴書など、基本情報は共通にする※</li>
+<li>ポートフォリオがある場合は、READMEとURLを記載しておきましょう。<br/>※Pages等でできている場合はフロントページ関連とリポジトリのURLを記載</li>
+</ul>
+</article>
+<article class="note">
+<h2 class="block-title">補足</h2>
+<p class="text">面接では、提出済み書類に基づいて質問されることが多いため、<br/>
+                自分が実際に提出した内容と一致していることが重要です。</p><br/>
+<p class="text">提出した履歴書・職務経歴書はリネームして整理しておきましょう<br/>
+                例：履歴書_株式会社○○_2026年.pdf<br/>
+                例：職務経歴書_株式会社○○_2026年.pdf</p><br/>
+<p class="text">※企業に提出する履歴書・職務経歴書には、<br/>
+                企業名は書いてはいけませんので気をつけましょう。</p>
+</article>
+<figure class="materials-sp-visual materials-resume-sp-note-image">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/履歴・職歴注意点.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</figure>
+</div>
+<aside aria-label="履歴書と職務経歴書のイメージ" class="image-panel materials-detail-visual materials-resume-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/履歴書を書く女性.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/履歴・職歴注意点.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#company-information">前へ</a>
+              <div class="page-number">2-2</div>
+              <a class="pager-link" href="#portfolio">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 57.14%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="portfolio" class="guide-page" hidden data-index="12" data-title="2-3. 自身のポートフォリオ" data-eyebrow="2-3 Portfolio" data-label="2-3">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">2-3 Portfolio</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#materials-preparation">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#resume-career-history">前へ</a>
+              <div class="page-number">2-3</div>
+              <a class="pager-link" href="#curriculum-learning-log">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid materials-detail-hero materials-portfolio-hero">
+<div class="stack materials-detail-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">2-3. 自身のポートフォリオ</h1>
+<p class="text">ポートフォリオがある場合は、それもChatGPTの情報源として登録しておきましょう。<br/>
+                作品の見せ方だけでなく、面接でどう説明するかまで壁打ちすることで、<br/>
+                自身の作品に対する第三者視点での見せ方も身に付きます。</p>
+</article>
+<article class="card">
+<h2 class="block-title">取り扱いのポイント</h2>
+<ul class="list">
+<li>ファイル数が多い場合は、ZIP化してまとめる方法もあります。<br/>
+                  情報源にはファイル制限があるため、バックエンドの実装も含めると入りきりません。<br/>
+                  そのためZIP化するという手段ですが、情報取得が薄くなるリスクもあります。</li>
+<li>重すぎるデータは扱いにくくなる場合があります。<br/>
+                  本当に見せたい作品のみを主軸に置きましょう。<br/>
+                  たくさんの作品があるのは素晴らしい一方で面接時間は限られているので、<br/>
+<strong>「この人は何ができるのか」</strong>という観点が薄く映る可能性があります。</li>
+<li>すべてを入れなくても、主要作品のREADMEや説明資料があれば十分なことも多いです。<br/>
+                  ポートフォリオが複数のファイルの場合はそのポートフォリオ用のプロジェクトを作り、<br/>
+                  ChatGPTにその作品の要約を生成させましょう。<br/>
+                  その要約を情報源に入れることでChatGPTは十分理解してくれます。</li>
+</ul>
+</article>
+<article class="note">
+<h2 class="block-title">AI活用に関する注意点</h2>
+<p class="text">AIを使って作成した成果物が含まれる場合、<br/>
+                ChatGPTがその内容をそのまま本人の単独スキルと誤認してしまう可能性があります。</p>
+<p class="text">そのため、各ポートフォリオについて、<br/>
+                ・どこまでAIを活用したか<br/>
+                ・自分が主に担当した工程はどこか</p>
+<p class="text">をテキストで添えておくと、この後の面接対策の精度が上がります。</p>
+</article>
+</div>
+<aside aria-label="ポートフォリオ整理のイメージ" class="image-panel materials-detail-visual materials-portfolio-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/インストラクターとカリキュラム.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#resume-career-history">前へ</a>
+              <div class="page-number">2-3</div>
+              <a class="pager-link" href="#curriculum-learning-log">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 61.90%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="curriculum-learning-log" class="guide-page" hidden data-index="13" data-title="2-4. 職業訓練校のカリキュラムと学習記録" data-eyebrow="2-4 Curriculum / Learning Log" data-label="2-4">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">2-4 Curriculum / Learning Log</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#materials-preparation">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#portfolio">前へ</a>
+              <div class="page-number">2-4</div>
+              <a class="pager-link" href="#company-questionnaire">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid materials-curriculum-hero">
+<article class="card materials-curriculum-intro">
+<h1 class="section-title" id="detail-title">2-4. 職業訓練校のカリキュラムと学習記録</h1>
+<p class="text">訓練校のカリキュラム表もプロジェクトの情報源として共有しておくことは有用です。<br/>
+              簡易なカレンダー形式でも、<br/>
+              現在どの分野を学習しているかをChatGPTと共有しやすくなります。</p>
+</article>
+<div class="stack materials-curriculum-column">
+<article class="card">
+<h2 class="block-title">共有しておきたい情報</h2>
+<ul class="list">
+<li>訓練名/コース名</li>
+<li>受講期間</li>
+<li>カリキュラム表</li>
+<li>学習中の分野や授業の流れ</li>
+</ul>
+</article>
+<article class="note">
+<h2 class="block-title">共有する意義</h2>
+<p class="text">面接では、<br/>
+<strong>「職業訓練校でどのようなことを学んでいますか」</strong><br/>
+                  と聞かれることが少なくありません。<br/>
+                この時、単にカリキュラム名を並べるだけでなく、<br/>
+                自分が授業を通じて何を理解し、どのような気づきがあったかまで話せると、<br/>
+<strong>「この人は受け身ではなく、内容を理解しながら学べる人だ」</strong><br/>
+                という印象につながりやすくなります。<br/>
+                そのため、カリキュラム表だけでなく、<br/>
+                日々の学習メモもあわせて共有しておくのがおすすめです。</p>
+</article>
+</div>
+<div class="stack materials-curriculum-column">
+<article class="card">
+<h2 class="block-title">おすすめの記録方法</h2>
+<p class="text">次の2つを記録しておくと、ChatGPTとの認識共有が進みやすくなります。</p>
+<ol class="number-list">
+<li>その日に受けた授業の簡易メモ
+                  <p class="text">1行程度でも可。<br/>
+                    授業名だけでなく、何を学び・感じたかを一言入れる。</p>
+</li>
+<li>週末時点でのその週のまとめ
+                  <p class="text">これも1行程度で可。<br/>
+                    今週何が身につき、課題を感じたかを簡単に整理する。</p>
+</li>
+</ol>
+<div class="prompt-box">
+<p class="prompt-label">その日の記録例</p>
+<p class="prompt-text">AI活用演習：質問の仕方によって回答の質が変わることを実感<br/>
+                  UI/UX概論：見た目だけでなく使いやすさの設計が重要だと学んだ</p>
+</div>
+<div class="prompt-box">
+<p class="prompt-label">週次まとめの例</p>
+<p class="prompt-text">AI活用とUI/UXの基礎を学び、<br/>
+                  ユーザーの視点や、考えたことを言語化する大切さを意識できるようになった</p>
+</div>
+</article>
+</div>
+<article class="card materials-curriculum-benefits">
+<h2 class="block-title">この運用の利点</h2>
+<p class="text">このような情報があると、ChatGPTは以下を把握しやすくなります。</p>
+              ・現在どの分野を学習中か/どこまで理解が進んでいるか<br/>
+              ・どの分野に手応えや課題を感じているか/面接で話せる具体的な学習内容は何か<br/>
+<p class="text">結果として、<strong>想定問答集の作成、自己PRの整理、学習内容の言語化</strong>が、より実態に即したものになりやすくなります。</p>
+</article>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#portfolio">前へ</a>
+              <div class="page-number">2-4</div>
+              <a class="pager-link" href="#company-questionnaire">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 66.67%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="company-questionnaire" class="guide-page" hidden data-index="14" data-title="2-5. 企業アンケートも有効活用" data-eyebrow="2-5 Company Questionnaire" data-label="2-5">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">2-5 Company Questionnaire</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#materials-preparation">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#curriculum-learning-log">前へ</a>
+              <div class="page-number">2-5</div>
+              <a class="pager-link" href="#chatgpt-support">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid materials-curriculum-hero materials-questionnaire-hero">
+<article class="card materials-curriculum-intro">
+<h1 class="section-title" id="detail-title">2-5. 企業アンケートも有効活用</h1>
+<p class="text">応募企業とのやり取りの中で、面接前の段階で簡易なアンケートへの回答を求められることがあります。<br/>
+              特にSES企業では、事前確認の一環として、以下のような項目を聞かれることがあります。</p>
+</article>
+<div class="stack materials-curriculum-column">
+<article class="card">
+<h2 class="block-title">よく確認される項目</h2>
+<ul class="list">
+<li>通勤可能範囲</li>
+<li>希望月収・希望年収</li>
+<li>前職の月収・年収</li>
+<li>得意な言語や技術領域</li>
+<li>配慮が必要な事項</li>
+</ul>
+<p class="text">これらの内容は、単なる事前確認ではなく、<br/>
+<strong>実際の面接で質問の起点になることがある</strong>ため、<br/>
+                提出した内容を自分でも把握しておくことが重要です。</p>
+</article>
+<article class="note">
+<h2 class="block-title">注意点</h2>
+<p class="text">企業によっては、アンケート回答後に<br/>
+                自分が回答した内容を見返せない形式<br/>
+                になっていることがあります。<br/>
+                その場合、面接時に「どのように回答したか」を正確に思い出せず、<br/>
+                受け答えにズレが生じる可能性があります。</p>
+</article>
+</div>
+<div class="stack materials-curriculum-column">
+<article class="card">
+<h2 class="block-title">おすすめの対応方法</h2>
+<p class="text">アンケートに回答する際は、各設問の回答を確定する前に<br/>
+                画面のスクリーンショットを保存しておくことをおすすめします。<br/>
+                スクショは、画像フォルダ内のスクショ用フォルダに保存されることが多いため、<br/>
+                回答後にまとめて確認しやすい場所に整理しておくと便利です。</p>
+<p class="text">そのうえで、アンケート終了後に、<br/>
+                「どの質問に対して、どのように回答したか」<br/>
+                を箇条書きでテキスト化し、ChatGPTのプロジェクト内の情報源として<br/>
+                追加しておくと、面接準備に活用しやすくなります。<br/>
+              ※事前にフォルダの場所は確認しましょう</p>
+</article>
+<article class="card">
+<h2 class="block-title">ChatGPTを使って整理する場合</h2>
+<p class="text">手間を減らしたい場合は、保存したスクショ画像を新規チャットに添付し、<br/>
+                「画像内のアンケート回答内容を、質問ごとに箇条書きで整理してください」<br/>
+                と依頼する方法もあります。</p>
+<p class="text">ただし、抽出した内容には誤認識や抜けが含まれる可能性があるため、<br/>
+                出力結果は必ず自分の目で確認してください。</p>
+</article>
+</div>
+<article class="card materials-curriculum-benefits">
+<h2 class="block-title">この運用の利点</h2>
+<p class="text">企業アンケートの回答内容も情報源として加えておくことで、ChatGPTは以下を把握しやすくなります。</p>
+<ul class="list">
+<li>企業に対して事前にどのような条件を伝えたか</li>
+<li>面接で深掘りされやすい項目は何か</li>
+<li>希望条件や過去条件について、どのように説明の一貫性を持たせるべきか</li>
+<li>想定問答集に反映すべき論点は何か</li>
+</ul>
+<p class="text">結果として、面接での受け答えの整合性が保ちやすくなり、想定問答集の精度向上にもつながります。</p>
+</article>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#curriculum-learning-log">前へ</a>
+              <div class="page-number">2-5</div>
+              <a class="pager-link" href="#chatgpt-support">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 71.43%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="chatgpt-support" class="guide-page" hidden data-index="15" data-title="3. ChatGPTを活用した面接準備の進め方" data-eyebrow="Section 3" data-label="3 / 6">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">Section 3</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#chatgpt-support">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#company-questionnaire">前へ</a>
+              <div class="page-number">3 / 6</div>
+              <a class="pager-link" href="#job-understanding">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="chapter-title" class="support-grid">
+<article class="card support-intro">
+<h1 class="page-title" id="chapter-title">3. ChatGPTを活用した<br/> 面接準備の進め方</h1>
+<p class="page-lead">整理した情報を揃えてプロジェクトを作成したら、<br/>
+              ChatGPTを相手に<br/>
+<strong>企業研究/想定問答/自己PR/志望動機/学習内容の言語化</strong>を進められます。<br/>
+              資料が整っているほど、回答の精度も安定しやすくなります。</p>
+<div class="note">
+<h2 class="block-title">補足</h2>
+<p class="text">面接は一回で終わりではありません。<br/>
+                生成されたプロジェクトを基本とし「求人情報URL/企業URL」を差し替えるだけである程度、使いまわしも可能です。<br/>
+                しかし、プロジェクトの情報源は常に更新し、どのプロジェクトがどの段階の情報かの管理はしっかり行いましょう。</p>
+</div>
+</article>
+<nav aria-labelledby="toc-title" class="stack support-toc">
+<div class="toc-heading">
+<h2 class="block-title" id="toc-title">第3章の目次</h2>
+</div>
+<div class="link-list">
+<a href="#job-understanding">
+<div aria-hidden="true" class="link-index">3-1</div>
+<div>
+<h3 class="link-title">求人内容の理解を深め、訓練校での学びを話せる形に整理する</h3>
+<p class="link-text">応募企業の特徴と訓練校での学びをリンクさせましょう</p>
+</div>
+</a>
+<a href="#reflection-memo">
+<div aria-hidden="true" class="link-index">3-2</div>
+<div>
+<h3 class="link-title">自分用の振り返りメモは役割を分けて活用する</h3>
+<p class="link-text">自身の現状の理解をしっかりと把握しましょう</p>
+</div>
+</a>
+<a href="#mock-qa">
+<div aria-hidden="true" class="link-index">3-3</div>
+<div>
+<h3 class="link-title">想定問答集を作成する</h3>
+<p class="link-text">面接は定型的な部分も多いです。しっかりと準備しましょう</p>
+</div>
+</a>
+<a href="#mock-interview">
+<div aria-hidden="true" class="link-index">3-4</div>
+<div>
+<h3 class="link-title">ChatGPTと模擬面接を行う</h3>
+<p class="link-text">ChatGPTを模擬面接官において、自身をSWOT分析しましょう</p>
+</div>
+</a>
+</div>
+</nav>
+<aside aria-label="ChatGPT活用のイメージ" class="image-panel support-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>image/インストラクターとデータ作成、面接.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#company-questionnaire">前へ</a>
+              <div class="page-number">3 / 6</div>
+              <a class="pager-link" href="#job-understanding">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 76.19%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="job-understanding" class="guide-page" hidden data-index="16" data-title="3-1. 求人内容の理解を深め、訓練校での学びを話せる形に整理する" data-eyebrow="3-1 Job Understanding" data-label="3-1">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">3-1 Job Understanding</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#chatgpt-support">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#chatgpt-support">前へ</a>
+              <div class="page-number">3-1</div>
+              <a class="pager-link" href="#reflection-memo">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid support-detail-hero support-job-understanding-hero">
+<div class="stack support-detail-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">3-1. 求人内容の理解を深め、<br/><span class="title-indent">   </span>
+                訓練校での学びを話せる形に整理する</h1>
+<p class="text">企業研究・求人内容の理解は昔と違い、今はリンクに飛べば様々な情報があります。<br/>
+                その一方で情報が膨大になり自身で整理するのには時間がかかります。<br/>
+                また、訓練校というものが面接官によっては縁のない方もいます。<br/>
+                ここでは、ChatGPTを活用した情報の整理方法や<br/>
+                自身の学びの説明の仕方などの<strong>プロンプト</strong>を紹介します。</p>
+</article>
+<article class="card">
+<h2 class="block-title">企業研究/求人内容</h2>
+<p class="text">
+                ・「情報源に応募先企業の求人情報リンクを載せてあります。<br/>
+                面接の日程調整まで済んでいますが、この求人の特徴を整理してください。」<br/>
+                上記、プロンプトを投げることで、求人内容の整理や自身との接点の把握に役立ちます。</p>
+<p class="text">・「情報源に応募先企業から受けたアンケートの私の回答があります。<br/>
+                このアンケートおよび企業情報からこの求人は私に何を求めているかを整理してください。」<br/>
+                上記、プロンプトを投げることで企業が何を求めているかを深く考えることができます。</p>
+</article>
+<article class="card">
+<h2 class="block-title">訓練校での学びの言語化</h2>
+<p class="text">
+                ・「情報源に職業訓練校のカリキュラムと日々の学習メモを入れてあります。<br/>
+                面接で『職業訓練校で何を学んでいますか』と聞かれたときに、<br/>
+                授業名の羅列ではなく、理解や気づきも含めて自然に答えられるよう整理してください。」<br/>
+                上記、プロンプトを投げることで、単なる受講履歴ではなく、<br/>
+<strong>学びを自分の言葉で説明する準備</strong>がしやすくなります。</p>
+<p class="text">・「情報源に職業訓練校のカリキュラムと日々の学習メモを入れてあります。<br/>
+                私の習熟度から考えて、情報源の応募先の企業との面接での強み/弱みを教えてください。<br/>
+                また、今後のカリキュラム日程から弱みを強みに近づける説得力のある言葉で返してください」<br/>
+                上記、プロンプトを投げることで、自己分析、およびこれからの課題が見えてきます。<br/>
+                ただ、生成された言葉を鵜呑みにするのではなく、自身の学習に役立てましょう。</p>
+</article>
+</div>
+<aside aria-label="求人内容理解のイメージ" class="image-panel support-detail-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/仮想空間と都会の風景.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#chatgpt-support">前へ</a>
+              <div class="page-number">3-1</div>
+              <a class="pager-link" href="#reflection-memo">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 80.95%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="reflection-memo" class="guide-page" hidden data-index="17" data-title="3-2. 自分用の振り返りメモは役割を分けて活用する" data-eyebrow="3-2 Reflection Memo" data-label="3-2">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">3-2 Reflection Memo</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#chatgpt-support">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#job-understanding">前へ</a>
+              <div class="page-number">3-2</div>
+              <a class="pager-link" href="#mock-qa">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="stack support-reflection-hero">
+<article class="card support-reflection-intro">
+<h1 class="section-title" id="detail-title">3-2. 自分用の振り返りメモは役割を分けて活用する</h1>
+<p class="text">学習記録や振り返りメモは有効ですが、
+              『作成した内容をすべてそのままChatGPTのプロジェクトに入れればよい』
+              というわけではありません。<br/>
+              情報を大量に入れすぎると、面接対策において重要な情報が埋もれてしまい、
+              かえって扱いにくくなることがあります。<br/>
+              そのため、<strong>ChatGPTのプロジェクトに入れる情報</strong>と、
+              自分専用の振り返りメモは、役割を分けて扱うことをおすすめします。</p>
+</article>
+<article class="card support-reflection-basic">
+<h2 class="block-title">基本的な考え方</h2>
+<p class="text">プロジェクト内には、面接準備に直接関係しやすい情報を中心に整理します。<br/>
+              ・企業情報/求人情報<br/>
+              ・提出済みの履歴書・職務経歴書<br/>
+              ・ポートフォリオ<br/>
+              ・訓練校のカリキュラム<br/>
+              ・日々の学習メモのうち、面接で話す材料になりやすい内容<br/>
+              ・企業アンケートの回答内容<br/>
+              などは、情報源として共有する意義が大きい内容です。</p>
+<p class="text">一方で、自分用に深く振り返るために作成したメモや、<br/>
+              細かな内省の記録については、<br/>
+              必ずしもすべてをプロジェクトに入れる必要はありません。</p>
+</article>
+<article class="card support-reflection-usage">
+<h2 class="block-title">活用方法</h2>
+<p class="text">自分専用の振り返りメモは、情報源に直接与えるのではなく、<br/>
+              ChatGPTに面接官役のロールプレイをさせる際に、<br/>
+              ＜自分で参照しながら回答する＞という使い方が有効です。</p>
+<p class="text">たとえば、プロジェクト内の情報をもとにChatGPTへ<br/>
+              「面接官役として質問してください」
+              と依頼し、<br/>その質問に対して、自分用の振り返りメモで整理していた内容も踏まえて回答します。</p>
+<p class="text">そのうえで、ChatGPTに<br/>
+              「今の回答を、より伝わりやすく改善してください」<br/>
+              「面接で自然に話せる表現に整えてください」
+              と依頼すると、<br/><strong>自分の振り返り内容を活かしながら、よりよい回答の仕方</strong><br/>
+              を整理しやすくなります。</p>
+</article>
+<article class="note support-reflection-note">
+<h2 class="block-title">この運用の利点</h2>
+<p class="text">このように役割を分けることで、<br/>
+              プロジェクト内の情報を整理しやすくなる<br/>
+              面接対策で重要な情報が埋もれにくくなる<br/>
+              自分自身の深い振り返りも無駄にならない<br/>
+              回答練習の中で、学びや考えをより自然に言語化しやすくなる<br/>
+              といった利点があります。<br/>
+              ChatGPTのプロジェクトは、情報を多く入れること自体が目的ではなく、<br/>
+              面接準備に必要な情報を見通しよく整理し、<br/>
+              活用しやすい状態にしておくことが重要です。</p>
+</article>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#job-understanding">前へ</a>
+              <div class="page-number">3-2</div>
+              <a class="pager-link" href="#mock-qa">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 85.71%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="mock-qa" class="guide-page" hidden data-index="18" data-title="3-3. 想定問答集を作成する" data-eyebrow="3-3 Mock Q&amp;A" data-label="3-3">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">3-3 Mock Q&amp;A</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#chatgpt-support">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#reflection-memo">前へ</a>
+              <div class="page-number">3-3</div>
+              <a class="pager-link" href="#mock-interview">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid support-detail-hero">
+<div class="stack support-detail-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">3-3. 想定問答集を作成する</h1>
+<p class="text">企業情報、求人情報、提出書類、ポートフォリオ、訓練校の学習記録、企業アンケートの回答内容などを整理したうえで、ChatGPTに想定問答集を作成させると、面接準備に役立ちます。</p>
+</article>
+<article class="card">
+<h2 class="block-title">問答集生成方法</h2>
+<p class="text">「Web面接時の一般的な想定問答集と、応募先企業向けの想定問答集をPowerPointファイル（PPTX）で作成してください。閲覧はGoogleスライドで行う想定です。情報は抜け落ちなく生成してください。」<br/>
+                とプロンプトを投げてみましょう。</p>
+<p class="text">また、生成された資料はそのまま使うのではなく、<br/>
+                必ず自分で内容を確認し、見やすい形に整えてから使用しましょう。<br/>
+                見直し、成型する作業が自分自身の面接対策にもつながります。</p>
+</article>
+<article class="note">
+<h2 class="block-title">補足</h2>
+<p class="text">想定問答集を生成する場合、<br/>
+                「4〜5ページにまとめてください」と要約を求めないほうが安全です。<br/>
+                ChatGPTに先に要約や圧縮をさせると、重要度の判断がChatGPT側に委ねられ、<br/>
+<strong>自分にとって必要な情報が抜け落ちる可能性</strong>が高いです。<br/>
+                そのため、まずは<strong>情報を抜け落ちなく含めた形で生成すること</strong>を優先し、<br/>
+                その後で、自分自身が見やすいように4〜5ページ程度へ整理する方法をおすすめします。</p>
+<p class="text">また、先ほども記述しましたが自身で資料を再構成することで、<br/>
+                ・どのページに何の情報を載せたか把握しやすくなる<br/>
+                ・面接中に確認したい内容へ素早くアクセスしやすくなる<br/>
+                ・単に読むだけでなく、内容の理解と整理にもつながる<br/>
+                といった利点があります。</p>
+<p class="text">※うまくファイル生成されず、チャット上に内容が表示される場合があります。<br/>
+                その場合は、改めて「PowerPointファイルで出力してください」と指示すると改善することがあります。</p>
+</article>
+</div>
+<aside aria-label="想定問答集のイメージ" class="image-panel support-detail-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/AIインストラクターの仕事風景.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#reflection-memo">前へ</a>
+              <div class="page-number">3-3</div>
+              <a class="pager-link" href="#mock-interview">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 90.48%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="mock-interview" class="guide-page" hidden data-index="19" data-title="3-4. ChatGPTと模擬面接を行う" data-eyebrow="3-4 Mock Interview" data-label="3-4">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">3-4 Mock Interview</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#chatgpt-support">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#mock-qa">前へ</a>
+              <div class="page-number">3-4</div>
+              <a class="pager-link" href="#closing">次へ</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="detail-title" class="content-grid support-detail-hero support-mock-interview-hero">
+<div class="stack support-detail-stack">
+<article class="card">
+<h1 class="section-title" id="detail-title">3-4. ChatGPTと模擬面接を行う</h1>
+<p class="text">ChatGPTと模擬面接をして、自身を分析しましょう</p>
+</article>
+<article class="card">
+<h2 class="block-title">SWOT分析</h2>
+<p class="text">SWOT分析とは自身の内部環境（強み・弱み）と外部環境（機会・脅威）を<br/>
+                4つの視点（S・W・O・T）で整理し、戦略策定に役立てるフレームワークです。<br/>
+                自身の【強み/機会】といったプラス要因をしっかりと把握し、<br/>
+                【弱み/脅威】のマイナス要因の払拭をしていきましょう。<br/>
+                そして面接においてプラス要因はとても大事ですが、<br/>
+                マイナスの要因を自身の<strong>伸びしろ</strong>に変換してアピールできることが大事です。</p>
+</article>
+<article class="card">
+<h2 class="block-title">WCV（キャリアの3要素）</h2>
+<p class="text">自己調整学習（Will-Can-Value）の視点も大事です。<br/>
+                ・Will：やりたいこと・意思（何に挑戦したいか）<br/>
+                ・Can：できること・能力（何ができるか）<br/>
+                ・Value：大切にしたい価値観（譲れない条件）<br/>
+                この軸がないと面接官側からは「この人はどこでもいいのかな」という人間にみられてしまいます。<br/>
+                どんな人にも輝ける場所があり、そして譲ってはいけない価値観も大事に個を確立しましょう。</p>
+</article>
+<article class="note">
+<h2 class="block-title">学びを整理する考え方</h2>
+<p class="text">職業訓練校での学びを整理する際は、単に「何を受講したか」を記録するだけでなく、<br/>
+                「どのような段階で理解が深まっているか」という視点を持つことも有効です。<br/>
+                その考え方の一つとして、<strong>守破離</strong>があります。</p>
+<p class="text">守破離とは、学びや成長の過程を、次の3段階で捉える考え方です。<br/>
+                ・守：まずは型を守り、基本を習得する段階<br/>
+                ・破：基本を土台にしながら、自分なりに工夫し、応用していく段階<br/>
+                ・離：基本を踏まえたうえで、自分なりのやり方や強みを確立していく段階</p>
+</article>
+</div>
+<aside aria-label="守破離のイメージ" class="image-panel support-detail-visual">
+<div class="image-frame image-placeholder"><div class="image-placeholder-inner"><span class="image-placeholder-badge">画像差し込み枠</span><div class="image-placeholder-files"><code>../image/守破離girl.png</code></div><div class="image-placeholder-size">表示枠サイズ: 1280 × 720</div><div class="image-placeholder-note">※実画像は未提供のため、ファイル名と表示枠サイズを表示しています。</div></div></div>
+</aside>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#mock-qa">前へ</a>
+              <div class="page-number">3-4</div>
+              <a class="pager-link" href="#closing">次へ</a>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 95.24%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<article id="closing" class="guide-page" hidden data-index="20" data-title="4. 最後に" data-eyebrow="Section 4" data-label="4 / 4">
+  <div class="site-shell">
+    <div class="slide-page">
+      <header class="slide-header">
+        <div class="slide-header-bar">
+          <span class="eyebrow">Section 4</span>
+          <nav class="header-nav" aria-label="共通ナビゲーション">
+            <a class="header-nav-link" href="#index">Indexへ</a>
+            <a class="header-nav-link" href="#closing">Sec.Topへ</a>
+          </nav>
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#mock-interview">前へ</a>
+              <div class="page-number">4 / 4</div>
+              <span class="pager-link is-disabled">次へ</span>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="slide-body stack">
+        <div class="slide-body-wrap">
+<section aria-labelledby="last-title" class="closing-grid">
+<article class="card closing-intro">
+<h1 class="section-title" id="last-title">4. 最後に</h1>
+</article>
+<article class="card closing-checklist-heading">
+<h2 class="block-title">最終チェックリスト</h2>
+<p class="text">面接前に、以下を一通り確認しておくと安心です。</p>
+</article>
+<article class="card closing-must">
+<h2 class="block-title">必須</h2>
+<ul class="list">
+<li>カメラが使える状態になっている</li>
+<li>マイクと音量の確認ができている</li>
+<li>通信環境に問題がない</li>
+<li>使用するWeb会議ツールを事前に開いて確認している</li>
+<li>表示名が適切である</li>
+<li>通知をオフにしている</li>
+<li>面接URLをすぐ開ける状態にしている</li>
+</ul>
+</article>
+<article class="card closing-recommended">
+<h2 class="block-title">推奨</h2>
+<ul class="list">
+<li>デュアルモニターまたは画面配置を調整している</li>
+<li>想定問答集を手元で見られるようにしている</li>
+<li>企業情報、求人情報、提出書類を見返している</li>
+<li>緊急時の再接続手段を準備している</li>
+<li>照明と背景を確認している</li>
+<li>職業訓練校のカリキュラムと学習メモを整理している</li>
+<li>企業アンケートの回答内容を見返せる状態にしている</li>
+<li>想定問答集は、まず情報を抜け落ちなく作成し、その後で自分が見やすい形に整理している</li>
+<li>自分用の振り返りメモと、プロジェクト内で共有する情報の役割を分けている</li>
+</ul>
+</article>
+<article class="note closing-summary">
+<h2 class="block-title">まとめ</h2>
+<p class="text">Web面接では、受け答えの内容だけでなく、<strong>通信環境、映り方、音声、画面構成、そして事前準備の精度</strong>が面接全体の進行に大きく影響します。</p>
+<p class="text">そのため、単に「面接対策をする」のではなく、</p>
+<ul class="list">
+<li>機材を問題なく使える状態にしておくこと</li>
+<li>面接に適した環境を整えておくこと</li>
+<li>応募先企業の情報と提出書類を整理しておくこと</li>
+<li>職業訓練校での学習内容を振り返れるようにしておくこと</li>
+<li>企業アンケートの回答内容も記録として残しておくこと</li>
+<li>ChatGPTを活用して想定問答や確認資料を準備しておくこと</li>
+</ul>
+<p class="text">このような流れで準備を進めることが大切です。</p>
+<p class="text">特に、職業訓練校に通っている場合は、<strong>カリキュラム表だけでなく、日々の学びや理解を短くても記録しておくこと</strong>をお勧めします<br/>
+              そうしておくことで、面接で「何を学んでいるのか」をより具体的に、自分の言葉で伝えやすくなります。<br/>
+              これは、知識の有無だけでなく、<strong>学ぶ姿勢や理解の深さ</strong>を面接官に伝えるうえでも有効です。</p>
+<p class="text">また、学びを振り返る際には、守破離のような考え方を参考にしながら、<br/>
+              今の自分が<strong>基礎を身につける段階なのか、応用を試している段階なのか、自分なりの工夫を形にし始めている段階なのか</strong><br/>
+              という視点で整理してみてください。そうすることで、自分の成長過程を面接で伝えやすくなります。</p>
+<p class="text">さらに、応募企業に事前提出したアンケートの回答内容も、面接準備における重要な情報の一つです。<br/>
+              通勤範囲、希望年収、得意分野、配慮事項などは、面接の中で確認されたり、さらに深掘りされることがあります。<br/>
+              だからこそ、<strong>自分がどのように回答したかを記録として残しておくこと</strong>が重要です。</p>
+<p class="text">加えて、ChatGPTに想定問答集を生成させる際は、最初から強く要約させるのではなく、<br/>
+<strong>まず情報を抜け漏れなく生成させ、その後で自分が確認しやすい資料へと整理する</strong>ことが大切です。<br/>
+              この手順を踏むことで、情報の欠落を防ぎつつ、自分自身の情報の再確認にもつながります。</p>
+<p class="text">また、振り返りメモは、すべてを一律にプロジェクトへ入れるのではなく、役割を分けて扱うことも意識してください。<br/>
+<strong>面接準備に直接必要な情報はプロジェクトに整理し、自分自身のための深い振り返りはロールプレイ練習の場で活用する。</strong><br/>
+              そういった使い分けをすることで、より実践的に運用しやすくなることを忘れないでください。</p>
+<p class="text">事前に整えておける部分をできるだけ整えておくことで、当日は余計な不安や混乱を減らし、面接そのものに集中しやすくなります。</p>
+<p class="text">末筆になりますが、本資料が皆様の面接準備に少しでも役立つとともに、<br/>
+<strong>AIを活用し、AIに使われるのではなく自分の目的に合わせて使いこなせる人間へと</strong><br/>
+              成長していく一助になれたならうれしく思います。</p>
+</article>
+</section>
+</div>
+      </main>
+      <footer class="slide-footer">
+        <div class="pager">
+          <div class="pager-main">
+            <div class="pager-links">
+              <a class="pager-link is-secondary" href="#mock-interview">前へ</a>
+              <div class="page-number">4 / 4</div>
+              <span class="pager-link is-disabled">次へ</span>
+            </div>
+          </div>
+          <div class="pager-side">
+            <div class="pager-progress" aria-hidden="true">
+              <div class="pager-progress-bar" style="width: 100.00%;"></div>
+            </div>
+            <div class="pager-hint">左右キーやフリック操作も可能です</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</article>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+<script>
+(() => {
+  const order = ['index', 'pre-interview-checks', 'usage-device', 'audio-camera-desktop', 'environment-notifications', 'platform-overview', 'google-meet', 'zoom', 'microsoft-teams', 'materials-preparation', 'company-information', 'resume-career-history', 'portfolio', 'curriculum-learning-log', 'company-questionnaire', 'chatgpt-support', 'job-understanding', 'reflection-memo', 'mock-qa', 'mock-interview', 'closing'];
+  const pages = order.map(id => document.getElementById(id));
+  const pageSelect = document.getElementById('pageSelect');
+  const prevBtn = document.getElementById('globalPrev');
+  const nextBtn = document.getElementById('globalNext');
+  const status = document.getElementById('globalStatus');
+  const progress = document.getElementById('globalProgress');
+
+  function currentIdFromHash() {
+    const raw = location.hash.replace(/^#/, '');
+    return order.includes(raw) ? raw : order[0];
+  }
+
+  function currentIndex() {
+    return order.indexOf(currentIdFromHash());
+  }
+
+  function render() {
+    const id = currentIdFromHash();
+    const index = currentIndex();
+
+    pages.forEach(page => {
+      const active = page.id === id;
+      page.hidden = !active;
+      page.classList.toggle('is-active', active);
+      page.setAttribute('aria-hidden', String(!active));
+    });
+
+    if (pageSelect) pageSelect.value = '#' + id;
+    if (status) status.textContent = `${index + 1} / ${order.length}`;
+    if (progress) progress.style.width = `${((index + 1) / order.length) * 100}%`;
+
+    prevBtn.disabled = index <= 0;
+    nextBtn.disabled = index >= order.length - 1;
+
+    document.querySelectorAll('.app-navbar .nav-link').forEach(link => {
+      const target = link.getAttribute('href');
+      link.classList.toggle('active', target === '#' + id);
+    });
+
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
+  function go(delta) {
+    const index = currentIndex();
+    const nextIndex = Math.max(0, Math.min(order.length - 1, index + delta));
+    if (nextIndex !== index) location.hash = '#' + order[nextIndex];
+  }
+
+  prevBtn.addEventListener('click', () => go(-1));
+  nextBtn.addEventListener('click', () => go(1));
+  pageSelect.addEventListener('change', (e) => {
+    location.hash = e.target.value;
+  });
+
+  window.addEventListener('hashchange', render);
+  document.addEventListener('keydown', (event) => {
+    const activeTag = document.activeElement ? document.activeElement.tagName : '';
+    const typing = activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT' || document.activeElement?.isContentEditable;
+    if (typing) return;
+    if (event.key === 'ArrowLeft') go(-1);
+    if (event.key === 'ArrowRight') go(1);
+  });
+
+  let startX = 0;
+  let startY = 0;
+  let activeTouch = null;
+  function isInteractiveTarget(target) {
+    return Boolean(target && target.closest('a, button, input, textarea, select, label'));
+  }
+
+  document.addEventListener('touchstart', (event) => {
+    if (event.touches.length !== 1) { activeTouch = null; return; }
+    if (isInteractiveTarget(event.target)) { activeTouch = null; return; }
+    const touch = event.touches[0];
+    activeTouch = touch.identifier;
+    startX = touch.clientX;
+    startY = touch.clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (event) => {
+    if (activeTouch === null) return;
+    const touch = Array.from(event.changedTouches).find(t => t.identifier === activeTouch);
+    activeTouch = null;
+    if (!touch) return;
+    const deltaX = touch.clientX - startX;
+    const deltaY = touch.clientY - startY;
+    if (Math.abs(deltaX) <= 50 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
+    if (deltaX > 0) go(-1); else go(1);
+  }, { passive: true });
+
+  if (!location.hash || !order.includes(location.hash.slice(1))) {
+    location.replace('#' + order[0]);
+  }
+  render();
+})();
+</script>
+
+</body>
+</html>
