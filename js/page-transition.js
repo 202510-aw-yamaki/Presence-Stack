@@ -1,10 +1,16 @@
 (function () {
   const DURATION_MS = 2000;
+  const CRISP_PREVIEW_MS = 200;
   const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const prefetchState = new Set();
+  const previewImageMap = {
+    'index.html': 'image/サムネ/indexサムネ.png',
+  };
   let overlay;
+  let previewContainer;
   let previewFrame;
+  let previewImage;
   let fill;
   let percent;
   let message;
@@ -49,6 +55,7 @@
     overlay.innerHTML = `
       <div class="page-transition-preview" data-transition-preview>
         <iframe class="page-transition-preview-frame" title="遷移先プレビュー" loading="eager"></iframe>
+        <img class="page-transition-preview-image" alt="遷移先サムネイル">
       </div>
       <canvas class="page-transition-canvas" aria-hidden="true"></canvas>
       <div class="page-transition-hex" aria-hidden="true"></div>
@@ -71,7 +78,9 @@
 
     document.body.appendChild(overlay);
 
+    previewContainer = overlay.querySelector('[data-transition-preview]');
     previewFrame = overlay.querySelector('.page-transition-preview-frame');
+    previewImage = overlay.querySelector('.page-transition-preview-image');
     fill = overlay.querySelector('.page-transition-fill');
     percent = overlay.querySelector('.page-transition-percent');
     message = overlay.querySelector('.page-transition-message');
@@ -230,6 +239,19 @@
     window.location.href = activeHref;
   }
 
+  function resolvePreviewImage(href) {
+    const targetUrl = new URL(href, window.location.href);
+    const normalizedPath = targetUrl.pathname.replace(/\\/g, '/');
+    const fileName = normalizedPath.split('/').pop() || '';
+    const relativePath = previewImageMap[fileName];
+
+    if (!relativePath) {
+      return '';
+    }
+
+    return new URL(relativePath, window.location.href).href;
+  }
+
   function beginTransition(href) {
     if (!href || isRunning) return false;
 
@@ -239,21 +261,46 @@
     document.body.classList.add('page-transition-lock');
 
     setProgress(0, messages.init);
-    if (previewFrame) {
+    const previewImageSrc = resolvePreviewImage(href);
+    const finalDelay = previewImageSrc ? DURATION_MS + CRISP_PREVIEW_MS : DURATION_MS;
+
+    if (previewContainer && previewImage && previewFrame) {
+      previewContainer.classList.toggle('is-image', Boolean(previewImageSrc));
+      previewImage.src = previewImageSrc || '';
       previewFrame.src = href;
     }
 
-    overlay.classList.remove('is-fading-out', 'is-revealing');
+    overlay.classList.remove('is-fading-out', 'is-revealing', 'is-crisp-preview', 'is-soft-reveal', 'is-thumbnail-reveal', 'is-thumbnail-prewarm');
     overlay.classList.add('is-active');
     overlay.setAttribute('aria-hidden', 'false');
 
     schedule(() => setProgress(16, messages.ready), 500);
+    if (previewImageSrc) {
+      schedule(() => {
+        overlay.classList.add('is-thumbnail-prewarm');
+      }, 800);
+    }
     schedule(() => setProgress(50, messages.sync), 1000);
     schedule(() => {
       setProgress(99, messages.final);
-      overlay.classList.add('is-revealing', 'is-fading-out');
+      overlay.classList.add('is-revealing');
+      if (previewImageSrc) {
+        overlay.classList.remove('is-thumbnail-prewarm');
+        overlay.classList.add('is-thumbnail-reveal');
+        overlay.classList.add('is-soft-reveal');
+      } else {
+        overlay.classList.add('is-fading-out');
+      }
     }, 1500);
-    schedule(finishNavigation, DURATION_MS);
+
+    if (previewImageSrc) {
+      schedule(() => {
+        overlay.classList.remove('is-soft-reveal');
+        overlay.classList.add('is-crisp-preview');
+      }, DURATION_MS);
+    }
+
+    schedule(finishNavigation, finalDelay);
 
     return true;
   }

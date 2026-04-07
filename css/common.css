@@ -532,6 +532,22 @@ body.is-scrolled .slide-header {
   transition-duration: 0.5s;
 }
 
+.page-transition-overlay.is-soft-reveal {
+  background: rgba(3, 8, 16, 0.16);
+  transition:
+    background 0.5s ease,
+    opacity 0.3s ease;
+}
+
+.page-transition-overlay.is-soft-reveal .page-transition-canvas,
+.page-transition-overlay.is-soft-reveal .page-transition-hex,
+.page-transition-overlay.is-soft-reveal .page-transition-noise,
+.page-transition-overlay.is-soft-reveal .page-transition-panel,
+.page-transition-overlay.is-soft-reveal .page-transition-character {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
 .page-transition-preview {
   position: absolute;
   inset: 0;
@@ -546,10 +562,45 @@ body.is-scrolled .slide-header {
   background: linear-gradient(180deg, rgba(248, 250, 248, 0.08), rgba(248, 250, 248, 0.02));
 }
 
+.page-transition-overlay.is-thumbnail-prewarm .page-transition-preview {
+  opacity: 0.18;
+  transform: translateY(10px) scale(0.995);
+  filter: blur(2px);
+}
+
 .page-transition-overlay.is-revealing .page-transition-preview {
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0);
+}
+
+.page-transition-overlay.is-thumbnail-reveal .page-transition-preview {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.page-transition-overlay.is-crisp-preview {
+  background: transparent;
+}
+
+.page-transition-overlay.is-crisp-preview .page-transition-canvas,
+.page-transition-overlay.is-crisp-preview .page-transition-hex,
+.page-transition-overlay.is-crisp-preview .page-transition-noise,
+.page-transition-overlay.is-crisp-preview .page-transition-panel,
+.page-transition-overlay.is-crisp-preview .page-transition-character {
+  opacity: 0;
+}
+
+.page-transition-overlay.is-crisp-preview .page-transition-preview {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: none;
 }
 
 .page-transition-preview-frame {
@@ -557,6 +608,31 @@ body.is-scrolled .slide-header {
   height: 100%;
   border: 0;
   background: #f8faf8;
+}
+
+.page-transition-preview-image {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: center top;
+  display: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.page-transition-preview.is-image .page-transition-preview-frame {
+  display: none;
+}
+
+.page-transition-preview.is-image .page-transition-preview-image {
+  display: block;
+}
+
+.page-transition-preview.is-image {
+  display: grid;
+  place-items: start center;
+  padding: 12px 24px 24px;
 }
 
 .page-transition-canvas,
