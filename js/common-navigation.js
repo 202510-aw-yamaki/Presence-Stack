@@ -51,14 +51,24 @@ document.addEventListener("DOMContentLoaded", () => {
   let percent;
   let message;
   let meta;
-  let canvas;
-  let canvasContext;
-  let hexLayer;
-  let signalLayer;
-  let binaryColumns = [];
-  let binaryFrameId = 0;
+  let stepNodes = [];
+  let streamCanvas;
+  let streamContext;
+  let neuronCanvas;
+  let neuronContext;
+  let viewport = { x: 0, y: 0 };
+  let streamWidth = 0;
+  let streamHeight = 0;
+  let neuronWidth = 0;
+  let neuronHeight = 0;
+  let binaryParticles = [];
+  let hexParticles = [];
+  let spiralParticles = [];
+  let neuralNodes = [];
+  let synapses = [];
+  let streamFrameId = 0;
+  let neuronFrameId = 0;
   let metaTimerId = 0;
-  let signalTimerId = 0;
   let transitionTimerIds = [];
   let isTransitionRunning = false;
 
@@ -228,9 +238,13 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.setAttribute("aria-hidden", "true");
     overlay.innerHTML = `
       <canvas class="page-transition-canvas" aria-hidden="true"></canvas>
-      <div class="page-transition-hex" aria-hidden="true"></div>
-      <div class="page-transition-noise" aria-hidden="true"></div>
-      <div class="page-transition-character" aria-hidden="true"></div>
+      <canvas class="page-transition-neuron" aria-hidden="true"></canvas>
+      <div class="page-transition-center-glow" aria-hidden="true"></div>
+      <div class="page-transition-vanishing-ring" aria-hidden="true"></div>
+      <div class="page-transition-lane" aria-hidden="true">
+        <div class="page-transition-lane-line is-left"></div>
+        <div class="page-transition-lane-line is-right"></div>
+      </div>
       <div class="page-transition-panel" role="status" aria-live="polite">
         <div class="page-transition-top">
           <div>
@@ -242,6 +256,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="page-transition-bar">
           <div class="page-transition-fill"></div>
         </div>
+        <div class="page-transition-steps">
+          <span class="page-transition-step is-active" data-step="0">0%</span>
+          <span class="page-transition-step" data-step="16">16%</span>
+          <span class="page-transition-step" data-step="44">44%</span>
+          <span class="page-transition-step" data-step="72">72%</span>
+          <span class="page-transition-step" data-step="99">99%</span>
+        </div>
         <div class="page-transition-meta">${createMixedMeta()}</div>
       </div>
     `;
@@ -251,13 +272,12 @@ document.addEventListener("DOMContentLoaded", () => {
     percent = overlay.querySelector(".page-transition-percent");
     message = overlay.querySelector(".page-transition-message");
     meta = overlay.querySelector(".page-transition-meta");
-    canvas = overlay.querySelector(".page-transition-canvas");
-    canvasContext = canvas.getContext("2d");
-    hexLayer = overlay.querySelector(".page-transition-hex");
-    signalLayer = overlay.querySelector(".page-transition-character");
+    stepNodes = Array.from(overlay.querySelectorAll(".page-transition-step"));
+    streamCanvas = overlay.querySelector(".page-transition-canvas");
+    streamContext = streamCanvas.getContext("2d");
+    neuronCanvas = overlay.querySelector(".page-transition-neuron");
+    neuronContext = neuronCanvas.getContext("2d");
 
-    createHexRows();
-    createSignalNetwork();
     resizeCanvas();
     startAnimatedLayers();
     window.addEventListener("resize", handleResize, { passive: true });
@@ -265,72 +285,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function handleResize() {
     resizeCanvas();
-    createHexRows();
-    createSignalNetwork();
   }
 
   function resizeCanvas() {
-    if (!canvas) return;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const fontSize = 18;
-    canvas.width = width;
-    canvas.height = height;
-    binaryColumns = Array.from({ length: Math.floor(width / fontSize) }, () => ({
-      y: Math.random() * -height,
-      speed: 1.1 + Math.random() * 2.1,
-      fontSize,
-    }));
+    setupStreams();
+    setupNeuronNetwork();
   }
 
   function startAnimatedLayers() {
     stopAnimatedLayers();
-    if (!REDUCED_MOTION) drawBinaryRain();
+    if (!REDUCED_MOTION) {
+      drawStreams();
+      drawNeuronNetwork();
+    }
     metaTimerId = window.setInterval(() => {
       if (meta) meta.textContent = createMixedMeta();
-    }, REDUCED_MOTION ? 1200 : 220);
-    signalTimerId = window.setInterval(() => {
-      createSignalNetwork();
-    }, REDUCED_MOTION ? 2200 : 1400);
+    }, REDUCED_MOTION ? 1200 : 130);
   }
 
   function stopAnimatedLayers() {
-    if (binaryFrameId) {
-      window.cancelAnimationFrame(binaryFrameId);
-      binaryFrameId = 0;
+    if (streamFrameId) {
+      window.cancelAnimationFrame(streamFrameId);
+      streamFrameId = 0;
+    }
+    if (neuronFrameId) {
+      window.cancelAnimationFrame(neuronFrameId);
+      neuronFrameId = 0;
     }
     if (metaTimerId) {
       window.clearInterval(metaTimerId);
       metaTimerId = 0;
     }
-    if (signalTimerId) {
-      window.clearInterval(signalTimerId);
-      signalTimerId = 0;
-    }
-  }
-
-  function drawBinaryRain() {
-    if (!canvasContext) return;
-
-    const width = canvas.width;
-    const height = canvas.height;
-    canvasContext.fillStyle = "rgba(2, 7, 14, 0.14)";
-    canvasContext.fillRect(0, 0, width, height);
-    canvasContext.font = "18px monospace";
-
-    binaryColumns.forEach((column, index) => {
-      const x = index * column.fontSize;
-      const char = Math.random() > 0.5 ? "1" : "0";
-      canvasContext.fillStyle = "rgba(110, 255, 219, 0.85)";
-      canvasContext.fillText(char, x, column.y);
-      column.y += column.speed * column.fontSize * 0.45;
-      if (column.y > height + 40) {
-        column.y = -20 - Math.random() * 240;
-        column.speed = 1.1 + Math.random() * 2.1;
-      }
-    });
-
-    binaryFrameId = window.requestAnimationFrame(drawBinaryRain);
   }
 
   function randomHexByte() {
@@ -347,111 +332,308 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function createMixedMeta() {
-    return Array.from({ length: 12 }, () => {
+    return Array.from({ length: 14 }, () => {
       const type = Math.random();
-      if (type > 0.66) return createBinaryString();
-      if (type > 0.33) return randomHexByte();
-      return createBase64Chunk();
+      if (type < 0.35) return createBinaryString();
+      if (type < 0.7) return randomHexByte();
+      return createBase64Chunk().slice(0, 4);
     }).join("  ");
   }
 
-  function buildHexString(length) {
-    return Array.from({ length }, () => randomHexByte()).join("   ");
+  function rand(min, max) {
+    return Math.random() * (max - min) + min;
   }
 
-  function createHexRows() {
-    if (!hexLayer) return;
-    hexLayer.innerHTML = "";
-    const rowCount = 12;
-    for (let index = 0; index < rowCount; index += 1) {
-      const row = document.createElement("div");
-      row.className = "page-transition-hex-row";
-      row.textContent = buildHexString(26 + Math.floor(Math.random() * 10));
-      row.style.top = `${6 + index * 7.2 + Math.random() * 2.2}%`;
-      row.style.animationDuration = `${7 + Math.random() * 7}s`;
-      row.style.animationDelay = `${-Math.random() * 10}s`;
-      row.style.opacity = `${0.25 + Math.random() * 0.5}`;
-      row.style.fontSize = `${12 + Math.random() * 6}px`;
-      hexLayer.appendChild(row);
-    }
+  function choose(values) {
+    return values[Math.floor(Math.random() * values.length)];
   }
 
-  function createSignalNetwork() {
-    if (!signalLayer) return;
-    signalLayer.innerHTML = "";
-    const fragment = document.createDocumentFragment();
-    fragment.appendChild(createBase64Spiral());
-    const nodeCount = 8;
-    const nodes = Array.from({ length: nodeCount }, (_, index) => ({
-      x: 12 + ((index % 4) * 24) + Math.random() * 8,
-      y: 18 + (Math.floor(index / 4) * 30) + Math.random() * 10,
-      delay: (Math.random() * 1.8).toFixed(2),
+  function setupStreams() {
+    if (!streamCanvas) return;
+    streamWidth = streamCanvas.width = window.innerWidth;
+    streamHeight = streamCanvas.height = window.innerHeight;
+    viewport = { x: streamWidth * 0.5, y: streamHeight * 0.42 };
+    binaryParticles = Array.from({ length: Math.max(120, Math.floor(streamWidth / 10)) }, () => spawnBinaryParticle());
+    hexParticles = Array.from({ length: Math.max(88, Math.floor(streamWidth / 14)) }, () => spawnHexParticle());
+    spiralParticles = Array.from({ length: Math.max(42, Math.floor(streamWidth / 34)) }, () => spawnSpiralParticle());
+  }
+
+  function spawnBinaryParticle() {
+    const fromTop = Math.random() > 0.5;
+    const sideSpread = rand(-streamWidth * 0.62, streamWidth * 0.62);
+    const startX = viewport.x + sideSpread;
+    const startY = fromTop ? rand(-streamHeight * 0.28, -30) : rand(streamHeight + 30, streamHeight * 1.22);
+    return {
+      type: "binary",
+      text: Math.random() > 0.5 ? "1" : "0",
+      x: startX, y: startY, prevX: startX, prevY: startY, startX, startY,
+      age: Math.random(), speed: rand(0.014, 0.028), startSize: rand(20, 42), endSize: rand(3, 7),
+      hue: fromTop ? "rgba(127,255,224," : "rgba(120,185,255,",
+      trail: fromTop ? "rgba(127,255,224," : "rgba(120,185,255,",
+    };
+  }
+
+  function spawnHexParticle() {
+    const fromLeft = Math.random() > 0.5;
+    const verticalSpread = rand(-streamHeight * 0.44, streamHeight * 0.44);
+    const startX = fromLeft ? rand(-streamWidth * 0.34, -70) : rand(streamWidth + 70, streamWidth * 1.34);
+    const startY = viewport.y + verticalSpread;
+    return {
+      type: "hex",
+      text: randomHexByte(),
+      x: startX, y: startY, prevX: startX, prevY: startY, startX, startY,
+      age: Math.random(), speed: rand(0.011, 0.022), startSize: rand(16, 28), endSize: rand(4, 8),
+      hue: fromLeft ? "rgba(120,185,255," : "rgba(153,216,255,",
+      trail: fromLeft ? "rgba(120,185,255," : "rgba(153,216,255,",
+    };
+  }
+
+  function spawnSpiralParticle() {
+    const orbit = rand(Math.min(streamWidth, streamHeight) * 0.16, Math.min(streamWidth, streamHeight) * 0.44);
+    const startAngle = rand(0, Math.PI * 2);
+    return {
+      type: "spiral",
+      text: createBase64Chunk().slice(0, Math.random() > 0.5 ? 3 : 4),
+      x: viewport.x, y: viewport.y, prevX: viewport.x, prevY: viewport.y,
+      orbit, startAngle, turns: rand(1.8, 3.2), age: Math.random(), speed: rand(0.01, 0.018),
+      startSize: rand(16, 28), endSize: rand(4, 7),
+      hue: choose(["rgba(184,141,255,", "rgba(127,255,224,", "rgba(120,185,255,"]),
+      trail: "rgba(184,141,255,",
+    };
+  }
+
+  function updateLinearParticle(particle) {
+    particle.prevX = particle.x;
+    particle.prevY = particle.y;
+    particle.age += particle.speed;
+    if (particle.age >= 1) return particle.type === "binary" ? spawnBinaryParticle() : spawnHexParticle();
+    const ease = 1 - Math.pow(1 - particle.age, 3.15);
+    particle.x = particle.startX + (viewport.x - particle.startX) * ease;
+    particle.y = particle.startY + (viewport.y - particle.startY) * ease;
+    return particle;
+  }
+
+  function updateSpiralParticle(particle) {
+    particle.prevX = particle.x;
+    particle.prevY = particle.y;
+    particle.age += particle.speed;
+    if (particle.age >= 1) return spawnSpiralParticle();
+    const ease = 1 - Math.pow(1 - particle.age, 2.8);
+    const radius = Math.max(2, particle.orbit * Math.pow(1 - ease, 1.12));
+    const angle = particle.startAngle + ease * particle.turns * Math.PI * 2;
+    particle.x = viewport.x + Math.cos(angle) * radius;
+    particle.y = viewport.y + Math.sin(angle) * radius * 0.72;
+    return particle;
+  }
+
+  function drawTrail(particle, alpha) {
+    streamContext.strokeStyle = `${particle.trail || particle.hue}${alpha})`;
+    streamContext.lineWidth = 1;
+    streamContext.beginPath();
+    streamContext.moveTo(particle.prevX, particle.prevY);
+    streamContext.lineTo(particle.x, particle.y);
+    streamContext.stroke();
+  }
+
+  function drawParticle(particle, alphaBoost = 0) {
+    const scale = particle.startSize + (particle.endSize - particle.startSize) * particle.age;
+    const alpha = Math.max(0.07, 0.98 - particle.age * (0.9 - alphaBoost));
+    drawTrail(particle, Math.min(0.52, alpha * 0.55));
+    streamContext.font = `${scale}px monospace`;
+    streamContext.fillStyle = `${particle.hue}${alpha})`;
+    streamContext.shadowBlur = 16;
+    streamContext.shadowColor = `${particle.hue}${Math.min(0.78, alpha * 0.68)})`;
+    streamContext.fillText(particle.text, particle.x, particle.y);
+  }
+
+  function drawStreams() {
+    if (!streamContext) return;
+    streamContext.clearRect(0, 0, streamWidth, streamHeight);
+    streamContext.textAlign = "center";
+    streamContext.textBaseline = "middle";
+    binaryParticles = binaryParticles.map(updateLinearParticle);
+    hexParticles = hexParticles.map(updateLinearParticle);
+    spiralParticles = spiralParticles.map(updateSpiralParticle);
+    binaryParticles.forEach((particle) => drawParticle(particle, 0));
+    hexParticles.forEach((particle) => drawParticle(particle, 0.06));
+    spiralParticles.forEach((particle) => drawParticle(particle, 0.12));
+    streamContext.shadowBlur = 0;
+    streamFrameId = window.requestAnimationFrame(drawStreams);
+  }
+
+  function cubicPoint(p0, p1, p2, p3, t) {
+    const mt = 1 - t;
+    return {
+      x: mt * mt * mt * p0.x + 3 * mt * mt * t * p1.x + 3 * mt * t * t * p2.x + t * t * t * p3.x,
+      y: mt * mt * mt * p0.y + 3 * mt * mt * t * p1.y + 3 * mt * t * t * p2.y + t * t * t * p3.y,
+    };
+  }
+
+  function setupNeuronNetwork() {
+    if (!neuronCanvas) return;
+    neuronWidth = neuronCanvas.width = window.innerWidth;
+    neuronHeight = neuronCanvas.height = window.innerHeight;
+    const count = Math.max(18, Math.floor(neuronWidth / 110));
+    neuralNodes = Array.from({ length: count }, () => ({
+      orbit: rand(30, Math.min(neuronWidth, neuronHeight) * 0.34),
+      angle: rand(0, Math.PI * 2),
+      speed: rand(0.0016, 0.0052),
+      drift: rand(-18, 18),
+      r: rand(1.4, 3.2),
     }));
-
-    nodes.forEach((node) => {
-      const pulse = document.createElement("span");
-      pulse.className = "page-transition-node";
-      pulse.style.left = `${node.x}%`;
-      pulse.style.top = `${node.y}%`;
-      pulse.style.animationDelay = `${node.delay}s`;
-      fragment.appendChild(pulse);
-    });
-
-    for (let index = 0; index < nodes.length - 1; index += 1) {
-      const a = nodes[index];
-      const b = nodes[index + 1];
-      const line = document.createElement("span");
-      line.className = "page-transition-signal";
-      const dx = b.x - a.x;
-      const dy = b.y - a.y;
-      const length = Math.sqrt(dx * dx + dy * dy);
-      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-      line.style.left = `${a.x}%`;
-      line.style.top = `${a.y}%`;
-      line.style.width = `${length}%`;
-      line.style.transform = `rotate(${angle}deg)`;
-      line.style.animationDelay = `${(index * 0.14).toFixed(2)}s`;
-      fragment.appendChild(line);
-    }
-
-    signalLayer.appendChild(fragment);
+    const synapseCount = Math.max(10, Math.floor(neuronWidth / 160));
+    synapses = Array.from({ length: synapseCount }, (_, index) => ({
+      angle: ((Math.PI * 2 * index) / synapseCount) + rand(-0.18, 0.18),
+      radius: rand(Math.min(neuronWidth, neuronHeight) * 0.4, Math.min(neuronWidth, neuronHeight) * 0.6),
+      bulbR: rand(10, 22),
+      branchPull: rand(0.22, 0.36),
+      wobble: rand(-16, 16),
+      pulseOffset: Math.random(),
+      vesicles: Array.from({ length: 4 + Math.floor(Math.random() * 4) }, () => ({
+        orbit: rand(14, 32),
+        angle: rand(0, Math.PI * 2),
+        speed: rand(0.004, 0.012),
+        r: rand(1.6, 3.4),
+      })),
+    }));
   }
 
-  function createBase64Spiral() {
-    const spiral = document.createElement("div");
-    spiral.className = "page-transition-spiral";
+  function drawNeuronNetwork() {
+    if (!neuronContext) return;
+    neuronContext.clearRect(0, 0, neuronWidth, neuronHeight);
+    const time = performance.now() * 0.001;
 
-    const core = document.createElement("div");
-    core.className = "page-transition-core";
-    core.textContent = createBase64Chunk();
-    spiral.appendChild(core);
+    synapses.forEach((synapse, index) => {
+      const driftAngle = synapse.angle + Math.sin(time * 0.35 + index * 0.7) * 0.06;
+      const bulb = { x: viewport.x + Math.cos(driftAngle) * synapse.radius, y: viewport.y + Math.sin(driftAngle) * synapse.radius * 0.78 };
+      const innerA = { x: viewport.x + Math.cos(driftAngle - 0.24) * synapse.radius * synapse.branchPull, y: viewport.y + Math.sin(driftAngle - 0.24) * synapse.radius * synapse.branchPull * 0.74 };
+      const innerB = { x: viewport.x + Math.cos(driftAngle + 0.18) * synapse.radius * (synapse.branchPull + 0.14), y: viewport.y + Math.sin(driftAngle + 0.18) * synapse.radius * (synapse.branchPull + 0.14) * 0.72 + synapse.wobble * 0.2 };
 
-    const ringConfigs = [
-      { radius: 11, count: 7, duration: 8.4, delayStep: 0.16 },
-      { radius: 19, count: 10, duration: 11.6, delayStep: 0.12 },
-      { radius: 28, count: 14, duration: 15.2, delayStep: 0.09 },
-    ];
+      neuronContext.strokeStyle = "rgba(127,255,224,0.11)";
+      neuronContext.lineWidth = 1.2;
+      neuronContext.beginPath();
+      neuronContext.moveTo(bulb.x, bulb.y);
+      neuronContext.bezierCurveTo(innerB.x, innerB.y, innerA.x, innerA.y, viewport.x, viewport.y);
+      neuronContext.stroke();
 
-    ringConfigs.forEach((config, ringIndex) => {
-      const ring = document.createElement("div");
-      ring.className = "page-transition-orbit";
-      ring.style.setProperty("--orbit-duration", `${config.duration}s`);
-      ring.style.setProperty("--orbit-radius", `${config.radius}vmin`);
-      ring.style.setProperty("--orbit-delay", `${-(ringIndex * 0.45)}s`);
+      neuronContext.strokeStyle = "rgba(120,185,255,0.08)";
+      neuronContext.lineWidth = 3.2;
+      neuronContext.beginPath();
+      neuronContext.moveTo(bulb.x, bulb.y);
+      neuronContext.bezierCurveTo(innerB.x, innerB.y, innerA.x, innerA.y, viewport.x, viewport.y);
+      neuronContext.stroke();
 
-      for (let index = 0; index < config.count; index += 1) {
-        const token = document.createElement("span");
-        token.className = "page-transition-base64";
-        token.textContent = createBase64Chunk();
-        token.style.setProperty("--orbit-angle", `${(360 / config.count) * index}deg`);
-        token.style.setProperty("--token-delay", `${-(index * config.delayStep + ringIndex * 0.28)}s`);
-        ring.appendChild(token);
-      }
+      const pulseT = (time * 0.95 + synapse.pulseOffset) % 1;
+      const pulseT2 = (pulseT + 0.22) % 1;
+      const pulsePoint = cubicPoint(bulb, innerB, innerA, viewport, 0.06 + pulseT * 0.84);
+      const pulsePoint2 = cubicPoint(bulb, innerB, innerA, viewport, 0.06 + pulseT2 * 0.84);
 
-      spiral.appendChild(ring);
+      neuronContext.strokeStyle = "rgba(150,255,236,0.26)";
+      neuronContext.lineWidth = 2.8;
+      neuronContext.shadowBlur = 18;
+      neuronContext.shadowColor = "rgba(127,255,224,0.34)";
+      neuronContext.beginPath();
+      neuronContext.moveTo(bulb.x, bulb.y);
+      neuronContext.bezierCurveTo(innerB.x, innerB.y, innerA.x, innerA.y, viewport.x, viewport.y);
+      neuronContext.stroke();
+
+      neuronContext.strokeStyle = "rgba(120,185,255,0.14)";
+      neuronContext.lineWidth = 5.2;
+      neuronContext.beginPath();
+      neuronContext.moveTo(bulb.x, bulb.y);
+      neuronContext.bezierCurveTo(innerB.x, innerB.y, innerA.x, innerA.y, viewport.x, viewport.y);
+      neuronContext.stroke();
+
+      neuronContext.fillStyle = "rgba(220,255,246,0.96)";
+      neuronContext.shadowBlur = 28;
+      neuronContext.shadowColor = "rgba(127,255,224,0.88)";
+      neuronContext.beginPath();
+      neuronContext.arc(pulsePoint.x, pulsePoint.y, 3.8, 0, Math.PI * 2);
+      neuronContext.fill();
+
+      neuronContext.fillStyle = "rgba(150,220,255,0.72)";
+      neuronContext.shadowBlur = 18;
+      neuronContext.shadowColor = "rgba(120,185,255,0.72)";
+      neuronContext.beginPath();
+      neuronContext.arc(pulsePoint2.x, pulsePoint2.y, 2.4, 0, Math.PI * 2);
+      neuronContext.fill();
+
+      neuronContext.strokeStyle = "rgba(200,255,245,0.34)";
+      neuronContext.lineWidth = 1.3;
+      neuronContext.beginPath();
+      neuronContext.moveTo(pulsePoint2.x, pulsePoint2.y);
+      neuronContext.lineTo(pulsePoint.x, pulsePoint.y);
+      neuronContext.stroke();
+      neuronContext.shadowBlur = 0;
+
+      neuronContext.fillStyle = "rgba(127,255,224,0.30)";
+      neuronContext.beginPath();
+      neuronContext.arc(bulb.x, bulb.y, synapse.bulbR * 1.18, 0, Math.PI * 2);
+      neuronContext.fill();
+
+      neuronContext.fillStyle = `rgba(210,255,245,${0.18 + 0.16 * Math.sin(time * 2.2 + index) ** 2})`;
+      neuronContext.beginPath();
+      neuronContext.arc(bulb.x, bulb.y, synapse.bulbR * 0.94, 0, Math.PI * 2);
+      neuronContext.fill();
+
+      neuronContext.fillStyle = "rgba(127,255,224,0.46)";
+      neuronContext.beginPath();
+      neuronContext.arc(bulb.x, bulb.y, synapse.bulbR * 0.72, 0, Math.PI * 2);
+      neuronContext.fill();
+
+      neuronContext.strokeStyle = "rgba(200,255,245,0.18)";
+      neuronContext.lineWidth = 1;
+      neuronContext.beginPath();
+      neuronContext.arc(bulb.x, bulb.y, synapse.bulbR, 0, Math.PI * 2);
+      neuronContext.stroke();
+
+      synapse.vesicles.forEach((vesicle, vesicleIndex) => {
+        vesicle.angle += vesicle.speed;
+        const vx = bulb.x + Math.cos(vesicle.angle + vesicleIndex * 0.45) * vesicle.orbit;
+        const vy = bulb.y + Math.sin(vesicle.angle + vesicleIndex * 0.45) * vesicle.orbit * 0.74;
+        neuronContext.fillStyle = vesicleIndex % 2 === 0 ? "rgba(120,185,255,0.34)" : "rgba(127,255,224,0.34)";
+        neuronContext.beginPath();
+        neuronContext.arc(vx, vy, vesicle.r, 0, Math.PI * 2);
+        neuronContext.fill();
+      });
     });
 
-    return spiral;
+    const points = neuralNodes.map((node) => {
+      node.angle += node.speed;
+      return {
+        x: viewport.x + Math.cos(node.angle) * node.orbit,
+        y: viewport.y + Math.sin(node.angle) * (node.orbit * 0.6) + node.drift,
+        r: node.r,
+      };
+    });
+
+    for (let index = 0; index < points.length; index += 1) {
+      const a = points[index];
+      for (let otherIndex = index + 1; otherIndex < points.length; otherIndex += 1) {
+        const b = points[otherIndex];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 150) {
+          const alpha = (1 - dist / 150) * 0.22;
+          neuronContext.strokeStyle = `rgba(127,255,224,${alpha})`;
+          neuronContext.lineWidth = 1;
+          neuronContext.beginPath();
+          neuronContext.moveTo(a.x, a.y);
+          neuronContext.lineTo(b.x, b.y);
+          neuronContext.stroke();
+        }
+      }
+    }
+
+    points.forEach((point) => {
+      neuronContext.fillStyle = "rgba(134,255,226,0.78)";
+      neuronContext.beginPath();
+      neuronContext.arc(point.x, point.y, point.r, 0, Math.PI * 2);
+      neuronContext.fill();
+    });
+
+    neuronFrameId = window.requestAnimationFrame(drawNeuronNetwork);
   }
 
   function setupTransitionLinks() {
@@ -586,6 +768,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (fill) fill.style.width = `${value}%`;
     if (percent) percent.textContent = `${value}%`;
     if (message) message.textContent = nextMessage;
+    stepNodes.forEach((node) => {
+      node.classList.toggle("is-active", Number(node.dataset.step) <= value);
+    });
   }
 
   function schedule(callback, delay) {
