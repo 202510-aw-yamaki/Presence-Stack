@@ -109,10 +109,22 @@ document.addEventListener("DOMContentLoaded", () => {
       </footer>
     `;
 
+    const headerSlot = document.querySelector("[data-shared-header]");
+    const footerSlot = document.querySelector("[data-shared-footer]");
     const existingHeader = document.querySelector(".slide-header");
     const existingFooter = document.querySelector(".slide-footer");
-    if (existingHeader) existingHeader.outerHTML = headerHtml;
-    if (existingFooter) existingFooter.outerHTML = footerHtml;
+
+    if (headerSlot) {
+      headerSlot.outerHTML = headerHtml;
+    } else if (existingHeader) {
+      existingHeader.outerHTML = headerHtml;
+    }
+
+    if (footerSlot) {
+      footerSlot.outerHTML = footerHtml;
+    } else if (existingFooter) {
+      existingFooter.outerHTML = footerHtml;
+    }
   }
 
   const scrollArea = document.querySelector(".slide-body");

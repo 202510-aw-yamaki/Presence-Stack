@@ -10,22 +10,7 @@
 <body>
   <div class="site-shell">
     <div class="slide-page">
-      <header class="slide-header">
-        <div class="slide-header-bar">
-          <span class="eyebrow">Closing</span>
-          <nav class="header-nav" aria-label="共通ナビゲーション">
-            <a class="header-nav-link" href="index.html">Indexへ</a>
-            <span class="header-nav-link is-current">Sec.Topへ</span>
-          </nav>
-          <div class="pager-main">
-            <div class="pager-links">
-              <a class="pager-link is-secondary" href="mock-interview.html">前へ</a>
-              <div class="page-number">1 / 1</div>
-              <span class="pager-link is-disabled">次へ</span>
-            </div>
-          </div>
-        </div>
-      </header>
+      <div data-shared-header></div>
 
       <main class="slide-body" aria-label="4 最後に">
         <section class="section-page" aria-labelledby="page-title">
@@ -79,27 +64,10 @@
         </section>
       </main>
 
-      <footer class="slide-footer">
-        <div class="pager">
-          <div class="pager-main">
-            <div class="pager-links">
-              <a class="pager-link is-secondary" href="mock-interview.html">前へ</a>
-              <div class="page-number">1 / 1</div>
-              <span class="pager-link is-disabled">次へ</span>
-            </div>
-          </div>
-          <div class="pager-side">
-            <div class="pager-progress" aria-hidden="true">
-              <div class="pager-progress-bar" style="width: 100%;"></div>
-            </div>
-            <div class="pager-hint">左右キーやフリック操作も可能です</div>
-          </div>
-        </div>
-      </footer>
+      <div data-shared-footer></div>
     </div>
   </div>
-
-  <script src="js/usage-device.js"></script>
+    <script src="js/usage-device.js"></script>
   <script src="js/page-transition.js"></script>
   <script src="js/common-navigation.js"></script>
 </body>
