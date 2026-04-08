@@ -6,6 +6,31 @@
   <title>Google Meet | Web面接ガイド</title>
   <link rel="stylesheet" href="..\..\css\common.css">
   <link rel="stylesheet" href="..\..\css\section_common.css">
+  <script>
+    (function () {
+      var key = "presenceTransitionState";
+      var ttl = 15000;
+      try {
+        var raw = window.sessionStorage.getItem(key);
+        if (!raw) return;
+        var state = JSON.parse(raw);
+        var path = decodeURIComponent(window.location.pathname).replace(/\\/g, "/");
+        var marker = "/Presence-Stack/";
+        var markerIndex = path.lastIndexOf(marker);
+        var pageKey = markerIndex >= 0 ? path.slice(markerIndex + marker.length) : path.replace(/^\/+/, "");
+        var expired = Date.now() - Number(state.startedAt || 0) > ttl;
+        if (!expired && state.phase === "resume" && state.target === pageKey) {
+          document.documentElement.classList.add("transition-resume");
+          return;
+        }
+        window.sessionStorage.removeItem(key);
+      } catch (error) {
+        try {
+          window.sessionStorage.removeItem(key);
+        } catch (innerError) {}
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="site-shell"><div class="slide-page"><div data-shared-header></div><main class="slide-body" aria-label="Google Meet"><section class="section-page" aria-labelledby="page-title"><article class="card title-card"><h1 id="page-title" class="page-title">Google Meet</h1></article><article class="note" aria-label="注釈"><div class="note-head"><span class="note-badge">注釈</span></div><p class="text">Google Meet はブラウザ参加が中心で、アカウント状態や表示名の扱いを確認しておくと入りやすくなります。</p></article><article class="check-card" aria-labelledby="meet-entry-title" role="button" tabindex="0" data-modal-target="#meet-entry-modal"><div class="check-card-header"><h2 id="meet-entry-title" class="check-title">参加時に確認すること</h2></div><div class="check-body"><div class="check-text" data-modal-step="0"><ul class="check-list"><li>使用ブラウザが対応しているか、権限許可が求められたらカメラとマイクを許可します。</li><li>Googleアカウントにログイン済みか、ゲスト参加かを確認します。</li><li>参加前の画面で音声と映像がオンになっているか見直します。</li></ul></div><figure class="check-figure" data-modal-step="1"><div class="media-frame"><div class="visual-card theme-green"><span class="visual-eyebrow">Meet Entry</span><h3 class="visual-title">ブラウザでそのまま入り<br>参加前に確認する</h3><div class="visual-meta"><span class="visual-chip">権限</span><span class="visual-chip">アカウント</span></div></div></div></figure></div></article><article class="check-card" aria-labelledby="meet-behavior-title" role="button" tabindex="0" data-modal-target="#meet-behavior-modal"><div class="check-card-header"><h2 id="meet-behavior-title" class="check-title">画面共有とチャットの扱い</h2></div><div class="check-body"><div class="check-text" data-modal-step="0"><ul class="check-list"><li>共有対象がタブ、ウィンドウ、画面全体のどれかを選べる点を把握しておきます。</li><li>チャット機能は補足連絡に使われる場合があるため、通知位置を知っておきます。</li><li>共有前に余計なタブや通知を閉じておくと安全です。</li></ul></div><figure class="check-figure" data-modal-step="1"><div class="media-frame"><div class="visual-card theme-slate"><span class="visual-eyebrow">Meet Tools</span><h3 class="visual-title">共有範囲を選んで<br>余計な画面を見せない</h3><div class="visual-meta"><span class="visual-chip">画面共有</span><span class="visual-chip">チャット</span></div></div></div></figure></div></article></section></main><div data-shared-footer></div></div></div>

@@ -6,6 +6,31 @@
   <title>Microsoft Teams | Web面接ガイド</title>
   <link rel="stylesheet" href="..\..\css\common.css">
   <link rel="stylesheet" href="..\..\css\section_common.css">
+  <script>
+    (function () {
+      var key = "presenceTransitionState";
+      var ttl = 15000;
+      try {
+        var raw = window.sessionStorage.getItem(key);
+        if (!raw) return;
+        var state = JSON.parse(raw);
+        var path = decodeURIComponent(window.location.pathname).replace(/\\/g, "/");
+        var marker = "/Presence-Stack/";
+        var markerIndex = path.lastIndexOf(marker);
+        var pageKey = markerIndex >= 0 ? path.slice(markerIndex + marker.length) : path.replace(/^\/+/, "");
+        var expired = Date.now() - Number(state.startedAt || 0) > ttl;
+        if (!expired && state.phase === "resume" && state.target === pageKey) {
+          document.documentElement.classList.add("transition-resume");
+          return;
+        }
+        window.sessionStorage.removeItem(key);
+      } catch (error) {
+        try {
+          window.sessionStorage.removeItem(key);
+        } catch (innerError) {}
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="site-shell"><div class="slide-page"><div data-shared-header></div><main class="slide-body" aria-label="Microsoft Teams"><section class="section-page" aria-labelledby="page-title"><article class="card title-card"><h1 id="page-title" class="page-title">Microsoft Teams</h1></article><article class="note" aria-label="注釈"><div class="note-head"><span class="note-badge">注釈</span></div><p class="text">Microsoft Teams はブラウザ参加かアプリ参加かで見え方が変わることがあります。案内メールの指示どおりに入れるかを前日までに確認しておきましょう。</p></article><article class="check-card" aria-labelledby="teams-entry-title" role="button" tabindex="0" data-modal-target="#teams-entry-modal"><div class="check-card-header"><h2 id="teams-entry-title" class="check-title">参加方法の違いを知る</h2></div><div class="check-body"><div class="check-text" data-modal-step="0"><ul class="check-list"><li>組織アカウントのログインが必要か、ゲスト参加でよいかを案内文で確認します。</li><li>ブラウザ参加が許可されているか、アプリのインストールが必要かを見ておきます。</li><li>表示名、カメラ、マイクを入室前に確認できるかを試しておきます。</li></ul></div><figure class="check-figure" data-modal-step="1"><div class="media-frame"><div class="visual-card theme-purple"><span class="visual-eyebrow">Teams Entry</span><h3 class="visual-title">ログイン条件と参加方法を<br>先に確認する</h3><div class="visual-meta"><span class="visual-chip">ゲスト</span><span class="visual-chip">アプリ</span></div></div></div></figure></div></article><article class="check-card" aria-labelledby="teams-behavior-title" role="button" tabindex="0" data-modal-target="#teams-behavior-modal"><div class="check-card-header"><h2 id="teams-behavior-title" class="check-title">面接中の見落としを防ぐ</h2></div><div class="check-body"><div class="check-text" data-modal-step="0"><ul class="check-list"><li>チャットや参加者一覧が開いていると画面が狭くなる場合があるため、必要ないパネルは閉じます。</li><li>共有前に余計な通知バナーが出ないよう、通知設定を再確認します。</li><li>退出時は「退出」ボタンを落ち着いて選び、誤って切断を繰り返さないようにします。</li></ul></div><figure class="check-figure" data-modal-step="1"><div class="media-frame"><div class="visual-card theme-gold"><span class="visual-eyebrow">Teams Flow</span><h3 class="visual-title">パネルを閉じて<br>面接画面を見やすく保つ</h3><div class="visual-meta"><span class="visual-chip">チャット</span><span class="visual-chip">退出</span></div></div></div></figure></div></article></section></main><div data-shared-footer></div></div></div>

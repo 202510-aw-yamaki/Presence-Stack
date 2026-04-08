@@ -6,6 +6,31 @@
   <title>Zoom | Web面接ガイド</title>
   <link rel="stylesheet" href="..\..\css\common.css">
   <link rel="stylesheet" href="..\..\css\section_common.css">
+  <script>
+    (function () {
+      var key = "presenceTransitionState";
+      var ttl = 15000;
+      try {
+        var raw = window.sessionStorage.getItem(key);
+        if (!raw) return;
+        var state = JSON.parse(raw);
+        var path = decodeURIComponent(window.location.pathname).replace(/\\/g, "/");
+        var marker = "/Presence-Stack/";
+        var markerIndex = path.lastIndexOf(marker);
+        var pageKey = markerIndex >= 0 ? path.slice(markerIndex + marker.length) : path.replace(/^\/+/, "");
+        var expired = Date.now() - Number(state.startedAt || 0) > ttl;
+        if (!expired && state.phase === "resume" && state.target === pageKey) {
+          document.documentElement.classList.add("transition-resume");
+          return;
+        }
+        window.sessionStorage.removeItem(key);
+      } catch (error) {
+        try {
+          window.sessionStorage.removeItem(key);
+        } catch (innerError) {}
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="site-shell"><div class="slide-page"><div data-shared-header></div><main class="slide-body" aria-label="Zoom"><section class="section-page" aria-labelledby="page-title"><article class="card title-card"><h1 id="page-title" class="page-title">Zoom</h1></article><article class="note" aria-label="注釈"><div class="note-head"><span class="note-badge">注釈</span></div><p class="text">Zoom は待機室や参加前プレビューが分かりやすく、面接でもよく使われます。参加前に音声と表示名を確認できる流れだけでも把握しておくと安心です。</p></article><article class="check-card" aria-labelledby="zoom-entry-title" role="button" tabindex="0" data-modal-target="#zoom-entry-modal"><div class="check-card-header"><h2 id="zoom-entry-title" class="check-title">参加前に見るポイント</h2></div><div class="check-body"><div class="check-text" data-modal-step="0"><ul class="check-list"><li>招待URLを開いたあと、アプリを使うかブラウザ参加するかを確認します。</li><li>参加前画面でカメラとマイクのオンオフを整えます。</li><li>表示名が本名または案内どおりの表記になっているかを見直します。</li></ul></div><figure class="check-figure" data-modal-step="1"><div class="media-frame"><div class="visual-card theme-blue"><span class="visual-eyebrow">Zoom Entry</span><h3 class="visual-title">入室前プレビューで<br>音声と表示名を確認</h3><div class="visual-meta"><span class="visual-chip">待機室</span><span class="visual-chip">表示名</span></div></div></div></figure></div></article><article class="check-card" aria-labelledby="zoom-behavior-title" role="button" tabindex="0" data-modal-target="#zoom-behavior-modal"><div class="check-card-header"><h2 id="zoom-behavior-title" class="check-title">面接中に意識する操作</h2></div><div class="check-body"><div class="check-text" data-modal-step="0"><ul class="check-list"><li>話していないときはミュートを保ち、呼ばれたら解除します。</li><li>画面共有を求められた場合に備えて、共有する資料だけを先に開いておきます。</li><li>退出時は慌てず、面接官の締めに合わせて終了します。</li></ul></div><figure class="check-figure" data-modal-step="1"><div class="media-frame"><div class="visual-card theme-slate"><span class="visual-eyebrow">During Meeting</span><h3 class="visual-title">ミュートと共有の位置を<br>なんとなく覚える</h3><div class="visual-meta"><span class="visual-chip">ミュート</span><span class="visual-chip">共有</span></div></div></div></figure></div></article></section></main><div data-shared-footer></div></div></div>

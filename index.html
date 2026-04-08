@@ -5,6 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web面接に向けた事前準備と対策</title>
   <link rel="stylesheet" href="css/common.css">
+  <script>
+    (function () {
+      var key = "presenceTransitionState";
+      var ttl = 15000;
+      try {
+        var raw = window.sessionStorage.getItem(key);
+        if (!raw) return;
+        var state = JSON.parse(raw);
+        var path = decodeURIComponent(window.location.pathname).replace(/\\/g, "/");
+        var marker = "/Presence-Stack/";
+        var markerIndex = path.lastIndexOf(marker);
+        var pageKey = markerIndex >= 0 ? path.slice(markerIndex + marker.length) : path.replace(/^\/+/, "");
+        var expired = Date.now() - Number(state.startedAt || 0) > ttl;
+        if (!expired && state.phase === "resume" && state.target === pageKey) {
+          document.documentElement.classList.add("transition-resume");
+          return;
+        }
+        window.sessionStorage.removeItem(key);
+      } catch (error) {
+        try {
+          window.sessionStorage.removeItem(key);
+        } catch (innerError) {}
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="site-shell">
