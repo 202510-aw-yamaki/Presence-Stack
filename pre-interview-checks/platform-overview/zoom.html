@@ -6,6 +6,51 @@
   <title>Zoom | Web面接ガイド</title>
   <link rel="stylesheet" href="..\..\css\common.css">
   <link rel="stylesheet" href="..\..\css\section_common.css">
+  <style>
+    html.transition-resume body {
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, rgba(9, 19, 34, 0.82), rgba(2, 6, 12, 0.98) 72%),
+        linear-gradient(180deg, rgba(4, 10, 18, 0.92), rgba(1, 4, 10, 0.98));
+    }
+
+    html.transition-resume .site-shell,
+    html.transition-resume .section-modal {
+      visibility: hidden;
+    }
+
+    html.transition-resume body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 119;
+      background:
+        radial-gradient(circle at center, rgba(9, 19, 34, 0.82), rgba(2, 6, 12, 0.98) 72%),
+        linear-gradient(180deg, rgba(4, 10, 18, 0.92), rgba(1, 4, 10, 0.98));
+    }
+
+    html.transition-resume body::after {
+      content: "SYSTEM TRANSFER   16%";
+      position: fixed;
+      left: 50%;
+      bottom: 11vh;
+      z-index: 120;
+      transform: translateX(-50%);
+      width: min(420px, calc(100vw - 32px));
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(6, 12, 22, 0.78);
+      border: 1px solid rgba(110, 255, 219, 0.18);
+      box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.34),
+        inset 0 0 18px rgba(255, 255, 255, 0.02);
+      color: #97ffe6;
+      font: 700 14px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      letter-spacing: 0.16em;
+      text-align: left;
+      white-space: pre;
+    }
+  </style>
   <script>
     (function () {
       var key = "presenceTransitionState";

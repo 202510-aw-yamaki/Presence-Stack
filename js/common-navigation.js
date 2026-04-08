@@ -380,6 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!signalLayer) return;
     signalLayer.innerHTML = "";
     const fragment = document.createDocumentFragment();
+    fragment.appendChild(createBase64Spiral());
     const nodeCount = 8;
     const nodes = Array.from({ length: nodeCount }, (_, index) => ({
       x: 12 + ((index % 4) * 24) + Math.random() * 8,
@@ -414,6 +415,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     signalLayer.appendChild(fragment);
+  }
+
+  function createBase64Spiral() {
+    const spiral = document.createElement("div");
+    spiral.className = "page-transition-spiral";
+
+    const core = document.createElement("div");
+    core.className = "page-transition-core";
+    core.textContent = createBase64Chunk();
+    spiral.appendChild(core);
+
+    const ringConfigs = [
+      { radius: 11, count: 7, duration: 8.4, delayStep: 0.16 },
+      { radius: 19, count: 10, duration: 11.6, delayStep: 0.12 },
+      { radius: 28, count: 14, duration: 15.2, delayStep: 0.09 },
+    ];
+
+    ringConfigs.forEach((config, ringIndex) => {
+      const ring = document.createElement("div");
+      ring.className = "page-transition-orbit";
+      ring.style.setProperty("--orbit-duration", `${config.duration}s`);
+      ring.style.setProperty("--orbit-radius", `${config.radius}vmin`);
+      ring.style.setProperty("--orbit-delay", `${-(ringIndex * 0.45)}s`);
+
+      for (let index = 0; index < config.count; index += 1) {
+        const token = document.createElement("span");
+        token.className = "page-transition-base64";
+        token.textContent = createBase64Chunk();
+        token.style.setProperty("--orbit-angle", `${(360 / config.count) * index}deg`);
+        token.style.setProperty("--token-delay", `${-(index * config.delayStep + ringIndex * 0.28)}s`);
+        ring.appendChild(token);
+      }
+
+      spiral.appendChild(ring);
+    });
+
+    return spiral;
   }
 
   function setupTransitionLinks() {

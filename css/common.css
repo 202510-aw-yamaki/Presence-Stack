@@ -698,6 +698,64 @@ body.is-scrolled .slide-header {
   z-index: 2;
 }
 
+.page-transition-spiral {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 72vmin;
+  height: 72vmin;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.page-transition-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(110, 255, 219, 0.26);
+  background: rgba(6, 16, 28, 0.82);
+  color: rgba(186, 255, 240, 0.96);
+  font: 700 14px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.18em;
+  box-shadow:
+    0 0 18px rgba(110, 255, 219, 0.32),
+    0 0 42px rgba(110, 200, 255, 0.18);
+}
+
+.page-transition-orbit {
+  position: absolute;
+  inset: 0;
+  animation: page-transition-orbit-spin var(--orbit-duration, 12s) linear infinite;
+  animation-delay: var(--orbit-delay, 0s);
+}
+
+.page-transition-base64 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: rgba(186, 255, 240, 0.94);
+  font: 700 13px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  text-shadow:
+    0 0 12px rgba(110, 255, 219, 0.32),
+    0 0 22px rgba(110, 200, 255, 0.18);
+  background: linear-gradient(90deg, rgba(6, 14, 28, 0.08), rgba(6, 14, 28, 0.36), rgba(6, 14, 28, 0.08));
+  border: 1px solid rgba(110, 255, 219, 0.08);
+  transform:
+    rotate(var(--orbit-angle))
+    translateX(var(--orbit-radius))
+    rotate(calc(-1 * var(--orbit-angle)));
+  animation: page-transition-token-pulse 1.8s ease-in-out infinite;
+  animation-delay: var(--token-delay, 0s);
+}
+
 .page-transition-node {
   position: absolute;
   width: 10px;
@@ -733,6 +791,28 @@ body.is-scrolled .slide-header {
   50% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes page-transition-orbit-spin {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+
+  to {
+    transform: rotate(360deg) scale(0.92);
+  }
+}
+
+@keyframes page-transition-token-pulse {
+  0%, 100% {
+    opacity: 0.42;
+    filter: brightness(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.24);
   }
 }
 
@@ -946,6 +1026,17 @@ body.is-scrolled .slide-header {
   .page-transition-panel {
     width: min(100vw - 20px, 560px);
     padding: 20px 16px 16px;
+  }
+
+  .page-transition-spiral {
+    width: 92vmin;
+    height: 92vmin;
+    top: 40%;
+  }
+
+  .page-transition-base64 {
+    font-size: 11px;
+    letter-spacing: 0.1em;
   }
 
   .page-transition-top {
