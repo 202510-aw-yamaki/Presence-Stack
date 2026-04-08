@@ -28,35 +28,39 @@
 │
 ├─ 📋 第2章：面接資料の準備方法
 │  ├─ [materials-preparation.html] - 章トップ
-│  │
-│  ├─ 🏢 2-1. [company-information.html]
-│  │       応募先企業の情報および求人情報
-│  │
-│  ├─ 📄 2-2. [resume-career-history.html]
-│  │       自身の履歴書・職務経歴書
-│  │
-│  ├─ 🎨 2-3. [portfolio.html]
-│  │       自身のポートフォリオ
-│  │
-│  ├─ 📚 2-4. [curriculum-learning-log.html]
-│  │       職業訓練校のカリキュラムおよび学習記録
-│  │
-│  └─ 📝 2-5. [company-questionnaire.html]
+│　│
+|　└─ [materials-preparation]フォルダ
+│  　　|
+│  　　├─ 🏢 2-1. [company-information.html]
+│  　　│       応募先企業の情報および求人情報
+│  　　│
+│  　　├─ 📄 2-2. [resume-career-history.html]
+│  　　│       自身の履歴書・職務経歴書
+│  　　│
+│  　　├─ 🎨 2-3. [portfolio.html]
+│  　　│       自身のポートフォリオ
+│  　　│
+│  　　├─ 📚 2-4. [curriculum-learning-log.html]
+│  　　│       職業訓練校のカリキュラムおよび学習記録
+│  　　│
+│  　　└─ 📝 2-5. [company-questionnaire.html]
 │          企業アンケートも有効活用
 │
 ├─ 💬 第3章：ChatGPTを活用した面接準備の進め方
 │  ├─ [chatgpt-support.html] - 章トップ
-│  │
-│  ├─ 🔍 3-1. [job-understanding.html]
-│  │       求人内容の理解を深め、訓練校での学びを話せる形に整理
-│  │
-│  ├─ 📌 3-2. [reflection-memo.html]
-│  │       自分用の振り返りメモは役割を分けて活用する
-│  │
-│  ├─ ❓ 3-3. [mock-qa.html]
-│  │       想定問答集を作成する
-│  │
-│  └─ 🎤 3-4. [mock-interview.html]
+│  |
+|  └─ [chatgpt-support]フォルダ
+│     │
+│     ├─ 🔍 3-1. [job-understanding.html]
+│     │       求人内容の理解を深め、訓練校での学びを話せる形に整理
+│     │
+│     ├─ 📌 3-2. [reflection-memo.html]
+│     │       自分用の振り返りメモは役割を分けて活用する
+│     │
+│     ├─ ❓ 3-3. [mock-qa.html]
+│     │       想定問答集を作成する
+│     │
+│     └─ 🎤 3-4. [mock-interview.html]
 │          ChatGPTと模擬面接を行う
 │
 ├─ ✅ 第4章：最後に
