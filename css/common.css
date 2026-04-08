@@ -33,6 +33,11 @@ html.transition-resume .section-modal {
   visibility: hidden;
 }
 
+html.transition-resume.transition-overlay-live body::before,
+html.transition-resume.transition-overlay-live body::after {
+  content: none;
+}
+
 body {
   margin: 0;
   min-width: 360px;
