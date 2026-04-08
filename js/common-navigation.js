@@ -738,12 +738,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("page-transition-lock");
     overlay.classList.add("is-active");
     overlay.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.remove("transition-resume");
     setProgress(16, labels.loading);
 
     schedule(() => setProgress(44, labels.route), REDUCED_MOTION ? 80 : TO_44_MS);
     schedule(() => {
       setProgress(72, labels.reveal);
-      document.documentElement.classList.remove("transition-resume");
       overlay.classList.add("is-revealing");
     }, REDUCED_MOTION ? 140 : TO_44_MS + TO_72_MS);
 
